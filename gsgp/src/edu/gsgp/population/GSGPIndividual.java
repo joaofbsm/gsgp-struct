@@ -18,7 +18,7 @@ import edu.gsgp.population.fitness.Fitness;
  * Copyright (C) 20014, Federal University of Minas Gerais, Belo Horizonte, Brazil
  */
 public class GSGPIndividual extends Individual{
-        
+
     public GSGPIndividual(Node tree, Fitness fitnessFunction){
         super(tree, fitnessFunction);
     }

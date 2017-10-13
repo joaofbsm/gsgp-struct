@@ -18,7 +18,7 @@ public class StandardPipe extends Pipeline{
     @Override
     public Population evolvePopulation(Population originalPop, ExperimentalData expData, int size) {
         // Update the breeder with the current population before generating a new one
-        for(Breeder breeder : breederArray) ((Breeder)breeder).setup(originalPop, expData);     
+        for(Breeder breeder : breederArray) ((Breeder)breeder).setup(originalPop, expData);
         
         // ======================= ADDED FOR GECCO PAPER =======================
 //        stats.storeDristInfo(originalPop);

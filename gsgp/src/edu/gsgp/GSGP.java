@@ -46,7 +46,7 @@ public class GSGP {
         statistics.addGenerationStatistic(population);
         
         for(int i = 0; i < properties.getNumGenerations() && !canStop; i++){
-            System.out.println("Generation " + (i+1) + ":");
+            //System.out.println("Generation " + (i+1) + ":");
                         
             // Evolve a new Population
             Population newPopulation = pipe.evolvePopulation(population, expData, properties.getPopulationSize()-1);
