@@ -66,7 +66,7 @@ public class GSMBreeder extends Breeder{
                                               add(new BigInteger(rt2.getNumNodes()+"")).
                                               add(BigInteger.ONE);
         Fitness fitnessFunction = evaluate(p, rt1, rt2, expData);
-        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction);
+        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p, null);
         return offspring;
     }
     

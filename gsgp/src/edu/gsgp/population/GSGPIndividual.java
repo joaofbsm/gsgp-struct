@@ -10,6 +10,7 @@ import edu.gsgp.Utils;
 import java.math.BigInteger;
 import edu.gsgp.nodes.Node;
 import edu.gsgp.population.fitness.Fitness;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /**
  * @author Luiz Otavio Vilas Boas Oliveira
@@ -31,13 +32,18 @@ public class GSGPIndividual extends Individual{
         super(tree, fitnessFunction);
         fitnessFunction.setNumNodes(numNodes);
     }
-    
+
     public GSGPIndividual(Node tree, int numNodes, Fitness fitnessFunction) {
         this(tree, new BigInteger(numNodes + ""), fitnessFunction);
     }
     
     public GSGPIndividual(BigInteger numNodes, Fitness fitnessFunction) {
         this(null, numNodes, fitnessFunction);
+    }
+
+    public GSGPIndividual(BigInteger numNodes,  Fitness fitnessFunction, GSGPIndividual T1, GSGPIndividual T2) {
+        super(null, fitnessFunction, T1, T2);
+        fitnessFunction.setNumNodes(numNodes);
     }
     
     public double eval(double[] input){

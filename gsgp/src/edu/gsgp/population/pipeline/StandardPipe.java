@@ -7,6 +7,8 @@
 package edu.gsgp.population.pipeline;
 
 import edu.gsgp.data.ExperimentalData;
+import edu.gsgp.population.GSGPIndividual;
+import edu.gsgp.population.Individual;
 import edu.gsgp.population.Population;
 import edu.gsgp.population.operator.Breeder;
 
@@ -37,8 +39,10 @@ public class StandardPipe extends Pipeline{
                 }
                 probabilitySum += breeder.getProbability();
             }
-            newPopulation.add(selectedBreeder.generateIndividual(rndGenerator, expData));
-        }        
+            Individual newInd = selectedBreeder.generateIndividual(rndGenerator, expData);
+            // CHECK HERE FOR PARENTS
+            newPopulation.add(newInd);
+        }
         return newPopulation;
     }
 

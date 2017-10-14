@@ -70,7 +70,7 @@ public class GSXBreeder extends Breeder{
         Node rt = properties.getRandomTree(rndGenerator);
         BigInteger numNodes = p1.getNumNodes().add(p2.getNumNodes()).add(new BigInteger(rt.getNumNodes() + "")).add(BigInteger.ONE);
         Fitness fitnessFunction = evaluate(p1, p2, rt, expData);
-        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction);
+        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p1, p2);
         return offspring;
     }
 

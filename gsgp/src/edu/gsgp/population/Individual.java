@@ -12,6 +12,9 @@ import java.util.Locale;
 import edu.gsgp.data.ExperimentalData;
 import edu.gsgp.nodes.Node;
 import edu.gsgp.population.fitness.Fitness;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import javax.naming.InitialContext;
 
 /**
  * @author Luiz Otavio Vilas Boas Oliveira
@@ -24,13 +27,22 @@ public abstract class Individual implements Comparable<Individual>{
     
     protected Fitness fitnessFunction;
 
+    protected ImmutablePair repr;
+
     public Individual(Node tree, Fitness fitnessFunction) {
         this.tree = tree;
         this.fitnessFunction = fitnessFunction;
+        this.repr = ImmutablePair.nullPair();
     }   
     
     public Individual(Node tree, Fitness fitnessFunction, ExperimentalData data) {
         this(tree, fitnessFunction);
+    }
+
+    public Individual(Node tree, Fitness fitnessFunction, GSGPIndividual T1, GSGPIndividual T2) {
+        this.tree = tree;
+        this.fitnessFunction = fitnessFunction;
+        this.repr = ImmutablePair.of(T1, T2);
     }
     
     public double eval(double[] input){
@@ -71,7 +83,16 @@ public abstract class Individual implements Comparable<Individual>{
     
     @Override
     public abstract Individual clone();
-    
+
+    public Individual getParent1() {
+        return (Individual) this.repr.getLeft();
+    }
+
+    public Individual getParent2() {
+        return (Individual) this.repr.getRight();
+    }
+
+
     public abstract double getFitness();
     public abstract String getNumNodesAsString();
     public abstract String getTrainingFitnessAsString();
