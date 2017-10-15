@@ -40,7 +40,6 @@ public class StandardPipe extends Pipeline{
                 probabilitySum += breeder.getProbability();
             }
             Individual newInd = selectedBreeder.generateIndividual(rndGenerator, expData);
-            // CHECK HERE FOR PARENTS
             newPopulation.add(newInd);
         }
         return newPopulation;

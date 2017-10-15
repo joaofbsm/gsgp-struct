@@ -14,8 +14,10 @@ import edu.gsgp.population.Individual;
 import edu.gsgp.data.PropertiesManager;
 import edu.gsgp.population.populator.Populator;
 import edu.gsgp.population.pipeline.Pipeline;
+import java.math.BigInteger;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -50,7 +52,8 @@ public class GSGP {
         
         statistics.addGenerationStatistic(population);
 
-        HashMap<Integer, Integer> freq = new HashMap<>();
+        Map<Integer, BigInteger> freqMap = new HashMap<>();
+        Map<Integer, HashMap<Integer, BigInteger>> reprMap = new HashMap<>();
         
         for(int i = 0; i < properties.getNumGenerations() && !canStop; i++){
             //System.out.println("Generation " + (i+1) + ":");
@@ -64,20 +67,12 @@ public class GSGP {
             population = newPopulation;
 
             for(Individual ind : newPopulation) {
-                //Individual parent1 = ind.getParent1();
-                //if (parent1 != null) {
-                    //System.out.println(parent1.getNumNodesAsString());
-                //}
-
-                getReprFreq(ind, freq);
-                System.in.read();
+                getReprFreq(ind, freqMap, reprMap);
             }
-
-            //System.in.read();
 
             statistics.addGenerationStatistic(population);
         }
-        System.out.println(freq);
+        System.out.println(freqMap);
         statistics.finishEvolution(population.getBestIndividual());
     }
 
@@ -85,32 +80,80 @@ public class GSGP {
         return statistics;
     }
 
-    public void getReprFreq(Individual ind, HashMap freq) {
+
+    public void getReprFreq(Individual ind, Map freqMap, Map reprMap) {
         Individual parent1 = ind.getParent1();
         Individual parent2 = ind.getParent2();
 
-        System.out.print("I'm " + ind.hashCode() + " and my parents are ");
-
         if (parent1 != null) {
-            System.out.print(parent1.hashCode() + ", ");
-            Integer f = (Integer) freq.get(parent1.hashCode());
-            freq.put(parent1.hashCode(), (f == null) ? 1 : f + 1);
-            //getReprFreq(parent1, freq);
+            Integer parent1Hash = parent1.hashCode();
+            HashMap<Integer, BigInteger> repr = (HashMap<Integer, BigInteger>) reprMap.get(parent1Hash);
 
-        }
-        else {
-            System.out.print("NULL, ");
+            if (repr == null) {
+                addRepr(reprMap, parent1);
+                repr = (HashMap<Integer, BigInteger>) reprMap.get(parent1Hash);
+            }
+
+            addFreq(freqMap, repr);
+            BigInteger freq = (BigInteger) freqMap.get(parent1Hash);
+            freqMap.put(parent1Hash, (freq == null) ? 1 : freq.add(BigInteger.valueOf(1)));
         }
 
         if (parent2 != null) {
-            System.out.print(parent2.hashCode() + "\n");
-            Integer f = (Integer) freq.get(parent2.hashCode());
-            freq.put(parent2.hashCode(), (f == null) ? 1 : f + 1);
-            //getReprFreq(parent2, freq);
+            Integer parent2Hash = parent2.hashCode();
+            HashMap<Integer, BigInteger> repr = (HashMap<Integer, BigInteger>) reprMap.get(parent2Hash);
 
+            if (repr == null) {
+                addRepr(reprMap, parent2);
+                repr = (HashMap<Integer, BigInteger>) reprMap.get(parent2Hash);
+            }
+
+            addFreq(freqMap, repr);
+            BigInteger freq = (BigInteger) freqMap.get(parent2Hash);
+            freqMap.put(parent2Hash, (freq == null) ? 1 : freq.add(BigInteger.valueOf(1)));
         }
-        else {
-            System.out.print("NULL\n");
+
+    }
+
+
+    public void addRepr(Map reprMap, Individual ind) {
+        Map<Integer, BigInteger> freqMap = new HashMap<>();
+        Individual parent1 = ind.getParent1();
+        Individual parent2 = ind.getParent2();
+        Integer indHash = ind.hashCode();
+
+        reprMap.put(indHash, freqMap);
+        freqMap.put(indHash, BigInteger.valueOf(1));
+
+        if (parent1 != null) {
+            addFreq(freqMap, (HashMap<Integer, BigInteger>) reprMap.get(parent1.hashCode()));
+        }
+
+        if (parent2 != null) {
+            addFreq(freqMap, (HashMap<Integer, BigInteger>) reprMap.get(parent2.hashCode()));
+        }
+    }
+
+
+    public void addFreq(Map freqMap, Map repr) {
+        /*
+        for(Map.Entry<Integer, Integer> entry : repr.entrySet()) {
+            Integer indHash = entry.getKey();
+            Integer freq = entry.getValue();
+            Integer storedFreq = (Integer) freqMap.get(indHash);
+
+            freqMap.put(indHash, (storedFreq == null) ? freq : storedFreq + freq);
+        */
+
+        Iterator it = repr.entrySet().iterator();
+        while(it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+
+            Integer indHash = (Integer) entry.getKey();
+            BigInteger freq = (BigInteger) entry.getValue();
+            BigInteger storedFreq = (BigInteger) freqMap.get(indHash);
+
+            freqMap.put(indHash, (storedFreq == null) ? freq : storedFreq.add(freq));
         }
     }
 }
