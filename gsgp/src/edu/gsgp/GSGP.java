@@ -58,7 +58,6 @@ public class GSGP {
             Integer indHash = ind.hashCode();
             freqMap.put(indHash, BigInteger.valueOf(0));
         }
-        System.out.println(freqMap);
         
         for(int i = 0; i < properties.getNumGenerations() && !canStop; i++){
             //System.out.println("Generation " + (i+1) + ":");
@@ -77,7 +76,7 @@ public class GSGP {
 
             statistics.addGenerationStatistic(population);
         }
-        System.out.println(freqMap);
+
         Map<Integer, BigInteger> sortedFreqMap = freqMap.entrySet()
                                                         .stream()
                                                         .sorted(Map.Entry.comparingByValue(Collections.reverseOrder()))
@@ -85,10 +84,9 @@ public class GSGP {
                                                                 Map.Entry::getKey,
                                                                 Map.Entry::getValue,
                                                                 (e1, e2) -> e1,
-                                                                LinkedHashMap::new
-                                                        ));
+                                                                LinkedHashMap::new));
 
-        System.out.println("Sorted\n" + sortedFreqMap);
+        System.out.println(sortedFreqMap);
         statistics.finishEvolution(population.getBestIndividual());
     }
 

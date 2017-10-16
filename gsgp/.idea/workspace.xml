@@ -21,15 +21,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GSGP.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edu/gsgp/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="19" column="12" lean-forward="false" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GSGP.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/gsgp/GSGP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="82" column="89" lean-forward="false" selection-start-line="82" selection-start-column="89" selection-end-line="82" selection-end-column="89" />
+            <state relative-caret-position="426">
+              <caret line="89" column="67" lean-forward="true" selection-start-line="89" selection-start-column="67" selection-end-line="89" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3953#3954#0" expanded="true" />
-                <element signature="e#3986#3987#0" expanded="true" />
+                <element signature="e#3810#3811#0" expanded="true" />
+                <element signature="e#3843#3844#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -38,7 +48,7 @@
       <file leaf-file-name="Individual.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/gsgp/population/Individual.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
+            <state relative-caret-position="1015">
               <caret line="91" column="40" lean-forward="false" selection-start-line="91" selection-start-column="40" selection-end-line="91" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -51,12 +61,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GSGPIndividual.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GSGPIndividual.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/gsgp/population/GSGPIndividual.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-398">
-              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="28" />
-              <folding />
+            <state relative-caret-position="214">
+              <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -152,13 +164,13 @@
       <list>
         <option value="$PROJECT_DIR$/src/edu/gsgp/Statistics.java" />
         <option value="$PROJECT_DIR$/src/edu/gsgp/Experimenter.java" />
-        <option value="$PROJECT_DIR$/src/edu/gsgp/Main.java" />
         <option value="$PROJECT_DIR$/src/edu/gsgp/population/treebuilder/HalfBuilder.java" />
         <option value="$PROJECT_DIR$/src/edu/gsgp/population/GSGPIndividual.java" />
         <option value="$PROJECT_DIR$/src/edu/gsgp/population/operator/GSXBreeder.java" />
         <option value="$PROJECT_DIR$/src/edu/gsgp/population/operator/GSMBreeder.java" />
         <option value="$PROJECT_DIR$/src/edu/gsgp/population/pipeline/StandardPipe.java" />
         <option value="$PROJECT_DIR$/src/edu/gsgp/population/Individual.java" />
+        <option value="$PROJECT_DIR$/src/edu/gsgp/Main.java" />
         <option value="$PROJECT_DIR$/src/edu/gsgp/GSGP.java" />
       </list>
     </option>
@@ -517,7 +529,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="FullScreen" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -927,7 +939,7 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="edu.gsgp.Main" />
       <option name="VM_PARAMETERS" value="-Xms512m -Xmx8g" />
-      <option name="PROGRAM_PARAMETERS" value="-p $PROJECT_DIR$/../../experiments/yacht.txt" />
+      <option name="PROGRAM_PARAMETERS" value="-p $PROJECT_DIR$/../../experiments/yacht.txt &gt; -p $PROJECT_DIR$/../../results/yacht.txt" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -964,12 +976,12 @@
       <workItem from="1505153198603" duration="458000" />
       <workItem from="1505156037536" duration="940000" />
       <workItem from="1505757472918" duration="29740000" />
-      <workItem from="1507868569889" duration="21809000" />
+      <workItem from="1507868569889" duration="24323000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55939000" />
+    <option name="totallyTimeSpent" value="58453000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
@@ -993,7 +1005,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2124834" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2124834" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.4940978" order="0" side_tool="false" content_ui="combo" />
@@ -1065,8 +1077,8 @@
           <caret line="47" column="21" lean-forward="false" selection-start-line="47" selection-start-column="21" selection-end-line="47" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3953#3954#0" expanded="true" />
-            <element signature="e#3986#3987#0" expanded="true" />
+            <element signature="e#3810#3811#0" expanded="true" />
+            <element signature="e#3843#3844#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1404,14 +1416,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/gsgp/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="15" column="43" lean-forward="false" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/gsgp/population/operator/GSMBreeder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
@@ -1462,14 +1466,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/gsgp/population/GSGPIndividual.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-398">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/gsgp/data/PropertiesManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-701">
@@ -1483,7 +1479,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/gsgp/population/Individual.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
+        <state relative-caret-position="1015">
           <caret line="91" column="40" lean-forward="false" selection-start-line="91" selection-start-column="40" selection-end-line="91" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1495,14 +1491,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/gsgp/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="19" column="12" lean-forward="false" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/gsgp/GSGP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="82" column="89" lean-forward="false" selection-start-line="82" selection-start-column="89" selection-end-line="82" selection-end-column="89" />
+        <state relative-caret-position="426">
+          <caret line="89" column="67" lean-forward="true" selection-start-line="89" selection-start-column="67" selection-end-line="89" selection-end-column="67" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3953#3954#0" expanded="true" />
-            <element signature="e#3986#3987#0" expanded="true" />
+            <element signature="e#3810#3811#0" expanded="true" />
+            <element signature="e#3843#3844#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/gsgp/population/GSGPIndividual.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
