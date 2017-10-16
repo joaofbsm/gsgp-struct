@@ -95,8 +95,8 @@ public class GSGP {
             }
 
             addFreq(freqMap, repr);
-            BigInteger freq = (BigInteger) freqMap.get(parent1Hash);
-            freqMap.put(parent1Hash, (freq == null) ? 1 : freq.add(BigInteger.valueOf(1)));
+            //BigInteger freq = (BigInteger) freqMap.get(parent1Hash);
+            //freqMap.put(parent1Hash, (freq == null) ? 1 : freq.add(BigInteger.valueOf(1)));
         }
 
         if (parent2 != null) {
@@ -109,8 +109,8 @@ public class GSGP {
             }
 
             addFreq(freqMap, repr);
-            BigInteger freq = (BigInteger) freqMap.get(parent2Hash);
-            freqMap.put(parent2Hash, (freq == null) ? 1 : freq.add(BigInteger.valueOf(1)));
+            //BigInteger freq = (BigInteger) freqMap.get(parent2Hash);
+            //freqMap.put(parent2Hash, (freq == null) ? 1 : freq.add(BigInteger.valueOf(1)));
         }
 
     }
@@ -123,28 +123,23 @@ public class GSGP {
         Integer indHash = ind.hashCode();
 
         reprMap.put(indHash, freqMap);
-        freqMap.put(indHash, BigInteger.valueOf(1));
+        if ((parent1 == null) && (parent2 == null)) {
+            freqMap.put(indHash, BigInteger.valueOf(1));
+        }
 
         if (parent1 != null) {
-            addFreq(freqMap, (HashMap<Integer, BigInteger>) reprMap.get(parent1.hashCode()));
+            HashMap<Integer, BigInteger> parent1Repr = (HashMap<Integer, BigInteger>) reprMap.get(parent1.hashCode());
+            addFreq(freqMap, parent1Repr);
         }
 
         if (parent2 != null) {
-            addFreq(freqMap, (HashMap<Integer, BigInteger>) reprMap.get(parent2.hashCode()));
+            HashMap<Integer, BigInteger> parent2Repr = (HashMap<Integer, BigInteger>) reprMap.get(parent2.hashCode());
+            addFreq(freqMap, parent2Repr);
         }
     }
 
 
     public void addFreq(Map freqMap, Map repr) {
-        /*
-        for(Map.Entry<Integer, Integer> entry : repr.entrySet()) {
-            Integer indHash = entry.getKey();
-            Integer freq = entry.getValue();
-            Integer storedFreq = (Integer) freqMap.get(indHash);
-
-            freqMap.put(indHash, (storedFreq == null) ? freq : storedFreq + freq);
-        */
-
         Iterator it = repr.entrySet().iterator();
         while(it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next();
