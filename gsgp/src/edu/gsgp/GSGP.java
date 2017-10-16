@@ -16,9 +16,8 @@ import edu.gsgp.population.populator.Populator;
 import edu.gsgp.population.pipeline.Pipeline;
 import java.math.BigInteger;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Luiz Otavio Vilas Boas Oliveira
@@ -79,6 +78,17 @@ public class GSGP {
             statistics.addGenerationStatistic(population);
         }
         System.out.println(freqMap);
+        Map<Integer, BigInteger> sortedFreqMap = freqMap.entrySet()
+                                                        .stream()
+                                                        .sorted(Map.Entry.comparingByValue(Collections.reverseOrder()))
+                                                        .collect(Collectors.toMap(
+                                                                Map.Entry::getKey,
+                                                                Map.Entry::getValue,
+                                                                (e1, e2) -> e1,
+                                                                LinkedHashMap::new
+                                                        ));
+
+        System.out.println("Sorted\n" + sortedFreqMap);
         statistics.finishEvolution(population.getBestIndividual());
     }
 
