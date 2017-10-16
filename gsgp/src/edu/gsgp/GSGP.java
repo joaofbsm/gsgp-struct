@@ -54,6 +54,12 @@ public class GSGP {
 
         Map<Integer, BigInteger> freqMap = new HashMap<>();
         Map<Integer, HashMap<Integer, BigInteger>> reprMap = new HashMap<>();
+
+        for(Individual ind : population) {
+            Integer indHash = ind.hashCode();
+            freqMap.put(indHash, BigInteger.valueOf(0));
+        }
+        System.out.println(freqMap);
         
         for(int i = 0; i < properties.getNumGenerations() && !canStop; i++){
             //System.out.println("Generation " + (i+1) + ":");
@@ -66,7 +72,7 @@ public class GSGP {
             if(bestIndividual.isBestSolution(properties.getMinError())) canStop = true;
             population = newPopulation;
 
-            for(Individual ind : newPopulation) {
+            for(Individual ind : population) {
                 getReprFreq(ind, freqMap, reprMap);
             }
 
@@ -81,6 +87,12 @@ public class GSGP {
     }
 
 
+    /**
+     *
+     * @param ind
+     * @param freqMap
+     * @param reprMap
+     */
     public void getReprFreq(Individual ind, Map freqMap, Map reprMap) {
         Individual parent1 = ind.getParent1();
         Individual parent2 = ind.getParent2();
@@ -89,7 +101,12 @@ public class GSGP {
         addInd(parent2, freqMap, reprMap);
     }
 
-
+    /**
+     *
+     * @param ind
+     * @param freqMap
+     * @param reprMap
+     */
     public void addInd(Individual ind, Map freqMap, Map reprMap) {
         if (ind != null) {
             Integer indHash = ind.hashCode();
@@ -104,7 +121,11 @@ public class GSGP {
         }
     }
 
-
+    /**
+     *
+     * @param reprMap
+     * @param ind
+     */
     public void addRepr(Map reprMap, Individual ind) {
         Map<Integer, BigInteger> freqMap = new HashMap<>();
         Individual parent1 = ind.getParent1();
@@ -127,7 +148,11 @@ public class GSGP {
         }
     }
 
-
+    /**
+     *
+     * @param freqMap
+     * @param repr
+     */
     public void addFreq(Map freqMap, Map repr) {
         Iterator it = repr.entrySet().iterator();
         while(it.hasNext()) {
