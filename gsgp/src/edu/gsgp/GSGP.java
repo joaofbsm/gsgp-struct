@@ -184,14 +184,14 @@ public class GSGP {
     /**
      *
      * @param indMap
-     * @param freqMap
+     * @param sortedFreqMap
      * @param properties
      * @throws IOException
      */
-    public void saveInds(Map indMap, Map freqMap, PropertiesManager properties) throws IOException {
+    public void saveInds(Map indMap, Map sortedFreqMap, PropertiesManager properties) throws IOException {
         BigInteger threshold = (BigInteger.valueOf((int) java.lang.Math.pow(10, 20)));
 
-        Iterator it = freqMap.entrySet().iterator();
+        Iterator it = sortedFreqMap.entrySet().iterator();
 
         int i = 0;
         Map.Entry first = (Map.Entry) it.next();
@@ -208,7 +208,7 @@ public class GSGP {
 
             indHash = (Integer) entry.getKey();
             BigInteger freq = (BigInteger) entry.getValue();
-            
+
             // freq is bigger than the threshold
             if (lastFreq.divide(threshold).compareTo(freq) == -1) {
                 ind = (Individual) indMap.get(indHash);
@@ -232,7 +232,7 @@ public class GSGP {
      * @throws IOException
      */
     public void saveInd(String ind, int i, PropertiesManager properties) throws IOException {
-        File out_dir = new File(properties.getOutputDir() + File.separator + properties.getFilePrefix());
+        File out_dir = new File(properties.getOutputDir() + File.separator + properties.getFilePrefix() + "/individuals/");
         out_dir.mkdirs();
 
         BufferedWriter bw;

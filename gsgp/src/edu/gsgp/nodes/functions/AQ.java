@@ -41,7 +41,7 @@ public class AQ extends Function{
     
     @Override
     public String toString() {
-        return "AQ(" + arguments[0].toString() + "," + arguments[1].toString() + ")";
+        return "AQ ( " + arguments[0].toString() + " " + arguments[1].toString() + " )";
     }
     
     @Override

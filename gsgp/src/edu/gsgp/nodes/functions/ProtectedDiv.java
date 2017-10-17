@@ -41,7 +41,7 @@ public class ProtectedDiv extends Function{
     
     @Override
     public String toString() {
-        return "(" + arguments[0].toString() + "%" + arguments[1].toString() + ")";
+        return "% ( " + arguments[0].toString() + " " + arguments[1].toString() + " )";
     }
     
     @Override
