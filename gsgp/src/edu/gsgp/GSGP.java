@@ -7,13 +7,16 @@
 package edu.gsgp;
 
 import edu.gsgp.data.ExperimentalData;
-import edu.gsgp.nodes.Node;
-import edu.gsgp.population.GSGPIndividual;
 import edu.gsgp.population.Population;
 import edu.gsgp.population.Individual;
 import edu.gsgp.data.PropertiesManager;
 import edu.gsgp.population.populator.Populator;
 import edu.gsgp.population.pipeline.Pipeline;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigInteger;
 
 import java.util.*;
@@ -51,11 +54,13 @@ public class GSGP {
         
         statistics.addGenerationStatistic(population);
 
+        Map<Integer, Individual> indMap = new HashMap<>();
         Map<Integer, BigInteger> freqMap = new HashMap<>();
         Map<Integer, HashMap<Integer, BigInteger>> reprMap = new HashMap<>();
 
         for(Individual ind : population) {
             Integer indHash = ind.hashCode();
+            indMap.put(indHash, ind);
             freqMap.put(indHash, BigInteger.valueOf(0));
         }
         
@@ -85,6 +90,8 @@ public class GSGP {
                                                                 Map.Entry::getValue,
                                                                 (e1, e2) -> e1,
                                                                 LinkedHashMap::new));
+
+        saveInds(indMap, sortedFreqMap, properties);
 
         System.out.println(sortedFreqMap);
         statistics.finishEvolution(population.getBestIndividual());
@@ -172,5 +179,65 @@ public class GSGP {
 
             freqMap.put(indHash, (storedFreq == null) ? freq : storedFreq.add(freq));
         }
+    }
+
+    /**
+     *
+     * @param indMap
+     * @param freqMap
+     * @param properties
+     * @throws IOException
+     */
+    public void saveInds(Map indMap, Map freqMap, PropertiesManager properties) throws IOException {
+        BigInteger threshold = (BigInteger.valueOf((int) java.lang.Math.pow(10, 20)));
+
+        Iterator it = freqMap.entrySet().iterator();
+
+        int i = 0;
+        Map.Entry first = (Map.Entry) it.next();
+
+        Integer indHash = (Integer) first.getKey();
+        BigInteger lastFreq = (BigInteger) first.getValue();
+        Individual ind = (Individual) indMap.get(indHash);
+
+        saveInd(ind.toString(), i, properties);
+        i += 1;
+
+        while(it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+
+            indHash = (Integer) entry.getKey();
+            BigInteger freq = (BigInteger) entry.getValue();
+            
+            // freq is bigger than the threshold
+            if (lastFreq.divide(threshold).compareTo(freq) == -1) {
+                ind = (Individual) indMap.get(indHash);
+                saveInd(ind.toString(), i, properties);
+
+                lastFreq = freq;
+                i += 1;
+            }
+            else {
+                break;
+            }
+
+        }
+    }
+
+    /**
+     *
+     * @param ind
+     * @param i
+     * @param properties
+     * @throws IOException
+     */
+    public void saveInd(String ind, int i, PropertiesManager properties) throws IOException {
+        File out_dir = new File(properties.getOutputDir() + File.separator + properties.getFilePrefix());
+        out_dir.mkdirs();
+
+        BufferedWriter bw;
+        bw = new BufferedWriter(new FileWriter(out_dir.getAbsolutePath() + File.separator + Integer.toString(i) + ".txt", false));
+        bw.write(ind);
+        bw.close();
     }
 }
