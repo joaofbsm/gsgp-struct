@@ -19,6 +19,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigInteger;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -200,7 +202,7 @@ public class GSGP {
         BigInteger lastFreq = (BigInteger) first.getValue();
         Individual ind = (Individual) indMap.get(indHash);
 
-        saveInd(ind.toString(), i, properties);
+        saveInd(ind.toString(), i, lastFreq, properties);
         i += 1;
 
         while(it.hasNext()) {
@@ -212,7 +214,7 @@ public class GSGP {
             // freq is bigger than the threshold
             if (lastFreq.divide(threshold).compareTo(freq) == -1) {
                 ind = (Individual) indMap.get(indHash);
-                saveInd(ind.toString(), i, properties);
+                saveInd(ind.toString(), i, freq, properties);
 
                 lastFreq = freq;
                 i += 1;
@@ -231,12 +233,17 @@ public class GSGP {
      * @param properties
      * @throws IOException
      */
-    public void saveInd(String ind, int i, PropertiesManager properties) throws IOException {
+    public void saveInd(String ind, int i, BigInteger freq, PropertiesManager properties) throws IOException {
         File out_dir = new File(properties.getOutputDir() + File.separator + properties.getFilePrefix() + "/individuals/");
         out_dir.mkdirs();
 
         BufferedWriter bw;
         bw = new BufferedWriter(new FileWriter(out_dir.getAbsolutePath() + File.separator + Integer.toString(i) + ".txt", false));
+
+        NumberFormat formatter = new DecimalFormat("0.#####E0");
+
+        bw.write(formatter.format(freq));
+        bw.write("\n");
         bw.write(ind);
         bw.close();
     }
