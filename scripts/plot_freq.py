@@ -7,13 +7,17 @@ __email__ = "joaofbsm@dcc.ufmg.br"
 __license__ = "GPL"
 __version__ = "3.0"
 
+import argparse
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 
+parser = argparse.ArgumentParser(description="Plotting Tree Frequency in GSGP")
+parser.add_argument("-d", "--dataset")
+args = parser.parse_args()
 
-file_name = "/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/results/yacht.txt"
+file_name = "/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/results/{}.txt".format(args.dataset)
 frequency = np.genfromtxt(file_name,  dtype = np.str, delimiter = ",")
 
 # Remove HashMap brackets

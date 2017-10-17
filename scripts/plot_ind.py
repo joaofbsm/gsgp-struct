@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Plot the tree that represents GSGP individuals"""
+"""Plot the trees that represents GSGP individuals"""
 
 __author__ = "João Francisco Barreto da Silva Martins"
 __email__ = "joaofbsm@dcc.ufmg.br"
@@ -80,19 +80,19 @@ def visualize_individual(repr_, freq, dir_path, name):
     dot_dir_path = "{}/dot".format(dir_path)
     png_dir_path = "{}/png".format(dir_path)
 
-    dot_file_path = "{}/{}.dot".format(dot_dir_path, name)
-    png_file_path = "{}/{}.png".format(png_dir_path, name)
-
     if not os.path.exists(dot_dir_path):
         os.makedirs(dot_dir_path)
-
     if not os.path.exists(png_dir_path):
         os.makedirs(png_dir_path)
+
+    dot_file_path = "{}/{}.dot".format(dot_dir_path, name)
+    png_file_path = "{}/{}.png".format(png_dir_path, name)
 
     labels, edges = parse_repr(repr_)
 
     g = nx.DiGraph()
 
+    # Use HTML like syntax so title can have padding from graph
     g.graph['graph']={"label" : "<Frequency = {} <br/> <br/> <br/>>".format(freq), "labelloc" : "t"}
 
     for key, value in labels.items():
