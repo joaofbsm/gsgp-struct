@@ -17,6 +17,8 @@ public class Main {
         try{
             long startTime = System.currentTimeMillis();
             Experimenter experiment = new Experimenter(args);
+
+            // Comment when creating the JAR
             System.out.println("Elapsed Time: " + ((System.currentTimeMillis() - startTime)/1000) + " seconds");
         }
         catch(Exception e){

@@ -18,9 +18,10 @@ parser = argparse.ArgumentParser(description="Plotting Tree Frequency in GSGP")
 parser.add_argument("-d", "--dataset")
 args = parser.parse_args()
 
-in_file = "/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/results/{}.txt".format(args.dataset)
-csv_file = "/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/results/{}-formated.csv".format(args.dataset)
-out_path = "/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/results/output-{}/plots".format(args.dataset)
+results_path = "/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/results"
+in_file = "{}/{}.txt".format(results_path, args.dataset)
+csv_file = "{}/{}-formated.csv".format(results_path, args.dataset)
+out_path = "{}/output-{}/plots".format(results_path, args.dataset)
 if not os.path.exists(out_path):
     os.makedirs(out_path)
 

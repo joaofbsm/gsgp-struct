@@ -9,10 +9,10 @@
 
 #datasets=("airfoil" "ccn" "ccun" "concrete" "energyCooling" "energyHeating" "parkinsons" "ppb-wth0s" "towerData" "wineRed" "wineWhite" "yacht")
 datasets=("yacht")
-gsgp_path=$(pwd)"gsgp/out/artifacts/gsgp_jar"
-experiments_path=$(pwd)"/experiments"
-results_path=$(pwd)"/results"
-scripts_path=$(pwd)"/scripts"
+gsgp_path="/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/gsgp/out/artifacts/gsgp_jar"
+experiments_path="/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/experiments"
+results_path="/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/results"
+scripts_path="/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/scripts"
 
 for dataset in "${datasets[@]}"
 do
