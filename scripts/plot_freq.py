@@ -25,7 +25,8 @@ out_path = "{}/output-{}/plots".format(results_path, args.dataset)
 if not os.path.exists(out_path):
     os.makedirs(out_path)
 
-frequency = np.genfromtxt(in_file,  dtype = np.str, delimiter = ",")
+# Skips the "Elapse time" string at the end of the files
+frequency = np.genfromtxt(in_file,  dtype=np.str, delimiter=",", skip_footer=1)
 
 # Remove HashMap brackets
 frequency[0] = frequency[0][1:]
