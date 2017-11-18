@@ -48,6 +48,7 @@ plt.style.use("ggplot")
 fig, ax = plt.subplots()
 
 ax.set_title(r"$\bf{" + args.dataset + "}$" + "\nFrequency of trees in GSGP individuals".format(args.dataset))
+#ax.set_title("Frequency of trees in GSGP individuals")
 ax.set_xlabel("Individual")
 ax.set_ylabel("Frequency")
 ax.set_yscale("log")
