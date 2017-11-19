@@ -81,19 +81,20 @@ public class GSGP {
                 getReprFreq(ind, freqMap, reprMap);
             }
 
+
             statistics.addGenerationStatistic(population);
         }
 
         Map<Integer, BigInteger> sortedFreqMap = freqMap.entrySet()
                                                         .stream()
                                                         .sorted(Map.Entry.comparingByValue(Collections.reverseOrder()))
-                                                        .collect(Collectors.toMap(
-                                                                Map.Entry::getKey,
-                                                                Map.Entry::getValue,
-                                                                (e1, e2) -> e1,
-                                                                LinkedHashMap::new));
+                                                        .collect(Collectors.toMap(Map.Entry::getKey,
+                                                                                  Map.Entry::getValue,
+                                                                                  (e1, e2) -> e1,
+                                                                                  LinkedHashMap::new));
 
         saveInds(indMap, sortedFreqMap, properties);
+        saveReprs(population, reprMap, properties);
 
         System.out.println(sortedFreqMap);
         statistics.finishEvolution(population.getBestIndividual());
@@ -153,15 +154,16 @@ public class GSGP {
         if ((parent1 == null) && (parent2 == null)) {
             freqMap.put(indHash, BigInteger.valueOf(1));
         }
+        else {
+            if (parent1 != null) {
+                HashMap<Integer, BigInteger> parent1Repr = (HashMap<Integer, BigInteger>) reprMap.get(parent1.hashCode());
+                addFreq(freqMap, parent1Repr);
+            }
 
-        if (parent1 != null) {
-            HashMap<Integer, BigInteger> parent1Repr = (HashMap<Integer, BigInteger>) reprMap.get(parent1.hashCode());
-            addFreq(freqMap, parent1Repr);
-        }
-
-        if (parent2 != null) {
-            HashMap<Integer, BigInteger> parent2Repr = (HashMap<Integer, BigInteger>) reprMap.get(parent2.hashCode());
-            addFreq(freqMap, parent2Repr);
+            if (parent2 != null) {
+                HashMap<Integer, BigInteger> parent2Repr = (HashMap<Integer, BigInteger>) reprMap.get(parent2.hashCode());
+                addFreq(freqMap, parent2Repr);
+            }
         }
     }
 
@@ -247,4 +249,45 @@ public class GSGP {
         bw.write(ind);
         bw.close();
     }
+
+    /**
+     *
+     * @param population
+     * @param reprMap
+     * @param properties
+     */
+    public void saveReprs(Population population, Map reprMap, PropertiesManager properties) throws IOException {
+        File out_dir = new File(properties.getOutputDir() + File.separator + properties.getFilePrefix() + File.separator);
+        out_dir.mkdirs();
+
+        BufferedWriter bw;
+        bw = new BufferedWriter(new FileWriter(out_dir.getAbsolutePath() + File.separator + "lastGenRepr.txt", false));
+
+        for(Individual ind : population) {
+            addRepr(reprMap, ind);
+
+            Integer indHash = ind.hashCode();
+            HashMap<Integer, BigInteger> repr = (HashMap<Integer, BigInteger>) reprMap.get(indHash);
+
+            Map<Integer, BigInteger> sortedRepr = repr.entrySet()
+                                                      .stream()
+                                                      .sorted(Map.Entry.comparingByValue(Collections.reverseOrder()))
+                                                      .collect(Collectors.toMap(Map.Entry::getKey,
+                                                                                Map.Entry::getValue,
+                                                                                (e1, e2) -> e1,
+                                                                                LinkedHashMap::new));
+
+            if(repr != null) {
+                bw.write("[" + indHash + "(TR RMSE: " + ind.getTrainingFitnessAsString() + ") -> " +  sortedRepr.toString() + "]\n");
+            }
+        }
+
+        bw.close();
+    }
+
+
+    public void printFitness(Population population) {
+
+    }
+
 }
