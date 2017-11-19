@@ -26,7 +26,7 @@ if not os.path.exists(out_path):
     os.makedirs(out_path)
 
 # Skips the "Elapse time" string at the end of the files
-frequency = np.genfromtxt(in_file,  dtype=np.str, delimiter=",", skip_footer=1)
+frequency = np.genfromtxt(in_file,  dtype=np.str, delimiter=",", skip_footer=2)
 
 # Remove HashMap brackets
 frequency[0] = frequency[0][1:]

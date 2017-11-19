@@ -56,6 +56,8 @@ public class GSGP {
         
         statistics.addGenerationStatistic(population);
 
+        Population initialPopulation = population;
+
         Map<Integer, Individual> indMap = new HashMap<>();
         Map<Integer, BigInteger> freqMap = new HashMap<>();
         Map<Integer, HashMap<Integer, BigInteger>> reprMap = new HashMap<>();
@@ -97,6 +99,7 @@ public class GSGP {
         saveReprs(population, reprMap, properties);
 
         System.out.println(sortedFreqMap);
+        printPopFitness(initialPopulation);
         statistics.finishEvolution(population.getBestIndividual());
     }
 
@@ -286,7 +289,22 @@ public class GSGP {
     }
 
 
-    public void printFitness(Population population) {
+    public void printPopFitness(Population population) {
+        Map<Integer, Double> rmseMap = new HashMap<>();
+
+        for(Individual ind : population) {
+            rmseMap.put(ind.hashCode(), Double.parseDouble(ind.getTrainingFitnessAsString()));
+        }
+
+        Map<Integer, Double> sortedRmse = rmseMap.entrySet()
+                                                     .stream()
+                                                     .sorted(Map.Entry.comparingByValue())
+                                                     .collect(Collectors.toMap(Map.Entry::getKey,
+                                                              Map.Entry::getValue,
+                                                              (e1, e2) -> e1,
+                                                              LinkedHashMap::new));
+
+        System.out.println(sortedRmse);
 
     }
 
