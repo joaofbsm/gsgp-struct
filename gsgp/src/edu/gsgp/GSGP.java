@@ -83,6 +83,7 @@ public class GSGP {
                 getReprFreq(ind, freqMap, reprMap);
             }
 
+            saveReprs(i, population, reprMap, properties);
 
             statistics.addGenerationStatistic(population);
         }
@@ -96,10 +97,10 @@ public class GSGP {
                                                                                   LinkedHashMap::new));
 
         saveInds(indMap, sortedFreqMap, properties);
-        saveReprs(population, reprMap, properties);
 
         System.out.println(sortedFreqMap);
         printPopFitness(initialPopulation);
+
         statistics.finishEvolution(population.getBestIndividual());
     }
 
@@ -259,18 +260,24 @@ public class GSGP {
      * @param reprMap
      * @param properties
      */
-    public void saveReprs(Population population, Map reprMap, PropertiesManager properties) throws IOException {
-        File out_dir = new File(properties.getOutputDir() + File.separator + properties.getFilePrefix() + File.separator);
-        out_dir.mkdirs();
+    public void saveReprs(int generation, Population population, Map reprMap, PropertiesManager properties) throws IOException {
+        File out_dir = new File(properties.getOutputDir() + File.separator + properties.getFilePrefix() + File.separator + "repr" + File.separator);
+        if(generation == 0) {
+            out_dir.mkdirs();
+        }
 
         BufferedWriter bw;
-        bw = new BufferedWriter(new FileWriter(out_dir.getAbsolutePath() + File.separator + "lastGenRepr.txt", false));
+        bw = new BufferedWriter(new FileWriter(out_dir.getAbsolutePath() + File.separator + Integer.toString(generation) + ".txt", false));
 
         for(Individual ind : population) {
-            addRepr(reprMap, ind);
-
             Integer indHash = ind.hashCode();
             HashMap<Integer, BigInteger> repr = (HashMap<Integer, BigInteger>) reprMap.get(indHash);
+
+            if(repr == null) {
+                addRepr(reprMap, ind);
+                repr = (HashMap<Integer, BigInteger>) reprMap.get(indHash);
+            }
+
 
             Map<Integer, BigInteger> sortedRepr = repr.entrySet()
                                                       .stream()
