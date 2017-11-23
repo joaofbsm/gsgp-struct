@@ -20,32 +20,42 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
  */
 public class GSGPIndividual extends Individual{
 
+    private Double crossoverConst;
+    private Node mutationT1;
+    private Node mutationT2;
+
     public GSGPIndividual(Node tree, Fitness fitnessFunction){
         super(tree, fitnessFunction);
     }
-    
+
     public GSGPIndividual(Fitness fitnessFunction){
         super(null, fitnessFunction);
     }
-    
+
     public GSGPIndividual(Node tree, BigInteger numNodes, Fitness fitnessFunction) {
         super(tree, fitnessFunction);
         fitnessFunction.setNumNodes(numNodes);
+        this.crossoverConst = null;
+        this.mutationT1 = null;
+        this.mutationT2 = null;
     }
 
     public GSGPIndividual(Node tree, int numNodes, Fitness fitnessFunction) {
         this(tree, new BigInteger(numNodes + ""), fitnessFunction);
     }
-    
+
     public GSGPIndividual(BigInteger numNodes, Fitness fitnessFunction) {
         this(null, numNodes, fitnessFunction);
     }
 
-    public GSGPIndividual(BigInteger numNodes,  Fitness fitnessFunction, GSGPIndividual T1, GSGPIndividual T2) {
+    public GSGPIndividual(BigInteger numNodes,  Fitness fitnessFunction, GSGPIndividual T1, GSGPIndividual T2, Double crossoverConst, Node mutationT1, Node mutationT2) {
         super(null, fitnessFunction, T1, T2);
         fitnessFunction.setNumNodes(numNodes);
+        this.crossoverConst = crossoverConst;
+        this.mutationT1 = mutationT1;
+        this.mutationT2 = mutationT2;
     }
-    
+
     public double eval(double[] input){
         return tree.eval(input);
     }
@@ -57,11 +67,11 @@ public class GSGPIndividual extends Individual{
     public void setNumNodes(BigInteger numNodes) {
         fitnessFunction.setNumNodes(numNodes);
     }
-   
+
     public void startNumNodes() {
         fitnessFunction.setNumNodes(tree.getNumNodes());
     }
-    
+
     @Override
     public GSGPIndividual clone(){
         if(tree != null)

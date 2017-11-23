@@ -30,10 +30,10 @@ public class GSMBreeder extends Breeder{
     public GSMBreeder(PropertiesManager properties, Double probability) {
         super(properties, probability);
     }
-    
-    private Fitness evaluate(GSGPIndividual ind, 
+
+    private Fitness evaluate(GSGPIndividual ind,
                              Node randomTree1,
-                             Node randomTree2, 
+                             Node randomTree2,
                              ExperimentalData expData){
         Fitness fitnessFunction = ind.getFitnessFunction().softClone();
         for(DatasetType dataType : DatasetType.values()){
@@ -43,7 +43,7 @@ public class GSMBreeder extends Breeder{
             double[] semInd;
             if(dataType == DatasetType.TRAINING)
                 semInd = ind.getTrainingSemantics();
-            else 
+            else
                 semInd =  ind.getTestSemantics();
             int instanceIndex = 0;
             for (Instance instance : dataset) {
@@ -63,13 +63,13 @@ public class GSMBreeder extends Breeder{
         Node rt1 = properties.getRandomTree(rndGenerator);
         Node rt2 = properties.getRandomTree(rndGenerator);
         BigInteger numNodes = p.getNumNodes().add(new BigInteger(rt1.getNumNodes()+"")).
-                                              add(new BigInteger(rt2.getNumNodes()+"")).
-                                              add(BigInteger.ONE);
+                add(new BigInteger(rt2.getNumNodes()+"")).
+                add(BigInteger.ONE);
         Fitness fitnessFunction = evaluate(p, rt1, rt2, expData);
-        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p, null);
+        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p, null, null, rt1, rt2);
         return offspring;
     }
-    
+
     @Override
     public Breeder softClone(PropertiesManager properties) {
         return new GSMBreeder(properties, probability);
