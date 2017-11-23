@@ -31,6 +31,9 @@ public class GSXBreeder extends Breeder{
         super(properties, probability);
     }
 
+
+    /*** EUCLIDEAN SEGMENT CROSSOVER ***/
+
     private Fitness evaluate(GSGPIndividual ind1,
                               GSGPIndividual ind2,
                               double rtValue,
@@ -65,6 +68,7 @@ public class GSXBreeder extends Breeder{
 
     @Override
     public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData) {
+    //public Individual generateIndividualEuclidean(MersenneTwister rndGenerator, ExperimentalData expData) {
         GSGPIndividual p1 = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
         GSGPIndividual p2 = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
         while(p1.equals(p2)) p2 = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
@@ -77,10 +81,8 @@ public class GSXBreeder extends Breeder{
     }
 
 
-    /*** MANHATTAN SEGMENT CROSSOVER
-     *
-     *
-     *
+    /*** MANHATTAN SEGMENT CROSSOVER ***/
+
     private Fitness evaluate(GSGPIndividual ind1,
                              GSGPIndividual ind2,
                              Node randomTree,
@@ -112,8 +114,9 @@ public class GSXBreeder extends Breeder{
         return fitnessFunction;
     }
 
-    @Override
-    public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData) {
+    //@Override
+    //public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData) {
+    public Individual generateIndividualManhattan(MersenneTwister rndGenerator, ExperimentalData expData) {
         GSGPIndividual p1 = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
         GSGPIndividual p2 = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
         while(p1.equals(p2)) p2 = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
@@ -123,8 +126,7 @@ public class GSXBreeder extends Breeder{
         GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p1, p2, null, null, null);
         return offspring;
     }
-    */
-    
+
 
     @Override
     public Breeder softClone(PropertiesManager properties) {

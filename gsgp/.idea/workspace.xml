@@ -36,31 +36,21 @@
       <file leaf-file-name="GSGP.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/gsgp/GSGP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="474">
-              <caret line="312" column="0" lean-forward="true" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
+            <state relative-caret-position="565">
+              <caret line="294" column="19" lean-forward="true" selection-start-line="294" selection-start-column="19" selection-end-line="294" selection-end-column="19" />
               <folding>
-                <element signature="e#0#11301#0" expanded="true" />
+                <element signature="e#0#11338#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Populator.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Populator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/gsgp/population/populator/Populator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
               <caret line="23" column="4" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SimplePopulator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/gsgp/population/populator/SimplePopulator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-101">
-              <caret line="39" column="62" lean-forward="false" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -79,14 +69,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GSXBreeder.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GSXBreeder.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/gsgp/population/operator/GSXBreeder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="126" column="4" lean-forward="false" selection-start-line="126" selection-start-column="4" selection-end-line="126" selection-end-column="4" />
+            <state relative-caret-position="199">
+              <caret line="118" column="4" lean-forward="false" selection-start-line="118" selection-start-column="4" selection-end-line="118" selection-end-column="4" />
               <folding>
-                <element signature="e#5963#5964#0" expanded="true" />
-                <element signature="e#6025#6026#0" expanded="true" />
+                <element signature="e#6203#6204#0" expanded="true" />
+                <element signature="e#6265#6266#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -203,9 +193,9 @@
         <option value="$PROJECT_DIR$/src/edu/gsgp/nodes/functions/Add.java" />
         <option value="$PROJECT_DIR$/src/edu/gsgp/Main.java" />
         <option value="$PROJECT_DIR$/src/edu/gsgp/data/PropertiesManager.java" />
-        <option value="$PROJECT_DIR$/src/edu/gsgp/GSGP.java" />
         <option value="$PROJECT_DIR$/src/edu/gsgp/population/GSGPIndividual.java" />
         <option value="$PROJECT_DIR$/src/edu/gsgp/population/operator/GSMBreeder.java" />
+        <option value="$PROJECT_DIR$/src/edu/gsgp/GSGP.java" />
         <option value="$PROJECT_DIR$/src/edu/gsgp/population/operator/GSXBreeder.java" />
       </list>
     </option>
@@ -947,12 +937,12 @@
       <workItem from="1510340892368" duration="635000" />
       <workItem from="1511020199217" duration="290000" />
       <workItem from="1511022344142" duration="19094000" />
-      <workItem from="1511190025040" duration="15616000" />
+      <workItem from="1511190025040" duration="17681000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110500000" />
+    <option name="totallyTimeSpent" value="112565000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1431,25 +1421,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/gsgp/GSGP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="312" column="0" lean-forward="true" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11301#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/gsgp/population/populator/SimplePopulator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-101">
-          <caret line="39" column="62" lean-forward="false" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/gsgp/population/operator/GSMBreeder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
@@ -1461,14 +1432,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/gsgp/population/operator/GSXBreeder.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/gsgp/population/populator/SimplePopulator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="126" column="4" lean-forward="false" selection-start-line="126" selection-start-column="4" selection-end-line="126" selection-end-column="4" />
-          <folding>
-            <element signature="e#5963#5964#0" expanded="true" />
-            <element signature="e#6025#6026#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="344">
+          <caret line="39" column="62" lean-forward="false" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="62" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1477,6 +1445,28 @@
         <state relative-caret-position="240">
           <caret line="23" column="4" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/gsgp/GSGP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="565">
+          <caret line="294" column="19" lean-forward="true" selection-start-line="294" selection-start-column="19" selection-end-line="294" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#11338#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/gsgp/population/operator/GSXBreeder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="118" column="4" lean-forward="false" selection-start-line="118" selection-start-column="4" selection-end-line="118" selection-end-column="4" />
+          <folding>
+            <element signature="e#6203#6204#0" expanded="true" />
+            <element signature="e#6265#6266#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

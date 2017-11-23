@@ -1,0 +1,66 @@
+strict digraph "" {
+	graph [label=<Frequency = 4.19867E39
+ <br/> <br/> <br/>>,
+		labelloc=t
+	];
+	node [label="\N"];
+	0	 [fillcolor="#ff0000",
+		label="*",
+		style=filled];
+	1	 [fillcolor="#ff0000",
+		label="+",
+		style=filled];
+	0 -> 1;
+	8	 [fillcolor="#ff0000",
+		label="*",
+		style=filled];
+	0 -> 8;
+	2	 [fillcolor="#ff0000",
+		label="-",
+		style=filled];
+	1 -> 2;
+	5	 [fillcolor="#ff0000",
+		label="-",
+		style=filled];
+	1 -> 5;
+	3	 [fillcolor="#00ff00",
+		label=x2,
+		style=filled];
+	2 -> 3;
+	4	 [fillcolor="#00ff00",
+		label=-0.6097665017680438,
+		style=filled];
+	2 -> 4;
+	6	 [fillcolor="#00ff00",
+		label=x0,
+		style=filled];
+	5 -> 6;
+	7	 [fillcolor="#00ff00",
+		label=x0,
+		style=filled];
+	5 -> 7;
+	9	 [fillcolor="#ff0000",
+		label=AQ,
+		style=filled];
+	8 -> 9;
+	12	 [fillcolor="#ff0000",
+		label="-",
+		style=filled];
+	8 -> 12;
+	10	 [fillcolor="#00ff00",
+		label=x0,
+		style=filled];
+	9 -> 10;
+	11	 [fillcolor="#00ff00",
+		label=x2,
+		style=filled];
+	9 -> 11;
+	13	 [fillcolor="#00ff00",
+		label=-0.8775373466781229,
+		style=filled];
+	12 -> 13;
+	14	 [fillcolor="#00ff00",
+		label=0.1459519910099536,
+		style=filled];
+	12 -> 14;
+}

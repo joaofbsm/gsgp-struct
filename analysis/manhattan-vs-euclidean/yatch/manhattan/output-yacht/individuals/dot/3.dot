@@ -1,0 +1,258 @@
+strict digraph "" {
+	graph [label=<Frequency = 3.59741E42
+ <br/> <br/> <br/>>,
+		labelloc=t
+	];
+	node [label="\N"];
+	0	 [fillcolor="#ff0000",
+		label="-",
+		style=filled];
+	1	 [fillcolor="#ff0000",
+		label="*",
+		style=filled];
+	0 -> 1;
+	32	 [fillcolor="#ff0000",
+		label=AQ,
+		style=filled];
+	0 -> 32;
+	2	 [fillcolor="#ff0000",
+		label=AQ,
+		style=filled];
+	1 -> 2;
+	17	 [fillcolor="#ff0000",
+		label=AQ,
+		style=filled];
+	1 -> 17;
+	3	 [fillcolor="#ff0000",
+		label="-",
+		style=filled];
+	2 -> 3;
+	10	 [fillcolor="#ff0000",
+		label="*",
+		style=filled];
+	2 -> 10;
+	4	 [fillcolor="#ff0000",
+		label="*",
+		style=filled];
+	3 -> 4;
+	7	 [fillcolor="#ff0000",
+		label="+",
+		style=filled];
+	3 -> 7;
+	5	 [fillcolor="#00ff00",
+		label=x3,
+		style=filled];
+	4 -> 5;
+	6	 [fillcolor="#00ff00",
+		label=x0,
+		style=filled];
+	4 -> 6;
+	8	 [fillcolor="#00ff00",
+		label=x0,
+		style=filled];
+	7 -> 8;
+	9	 [fillcolor="#00ff00",
+		label=x3,
+		style=filled];
+	7 -> 9;
+	11	 [fillcolor="#ff0000",
+		label=AQ,
+		style=filled];
+	10 -> 11;
+	14	 [fillcolor="#ff0000",
+		label="+",
+		style=filled];
+	10 -> 14;
+	12	 [fillcolor="#00ff00",
+		label=x0,
+		style=filled];
+	11 -> 12;
+	13	 [fillcolor="#00ff00",
+		label=x4,
+		style=filled];
+	11 -> 13;
+	15	 [fillcolor="#00ff00",
+		label=x2,
+		style=filled];
+	14 -> 15;
+	16	 [fillcolor="#00ff00",
+		label=x2,
+		style=filled];
+	14 -> 16;
+	18	 [fillcolor="#ff0000",
+		label="-",
+		style=filled];
+	17 -> 18;
+	25	 [fillcolor="#ff0000",
+		label="*",
+		style=filled];
+	17 -> 25;
+	19	 [fillcolor="#ff0000",
+		label="*",
+		style=filled];
+	18 -> 19;
+	22	 [fillcolor="#ff0000",
+		label="+",
+		style=filled];
+	18 -> 22;
+	20	 [fillcolor="#00ff00",
+		label=x0,
+		style=filled];
+	19 -> 20;
+	21	 [fillcolor="#00ff00",
+		label=x4,
+		style=filled];
+	19 -> 21;
+	23	 [fillcolor="#00ff00",
+		label=x3,
+		style=filled];
+	22 -> 23;
+	24	 [fillcolor="#00ff00",
+		label=x3,
+		style=filled];
+	22 -> 24;
+	26	 [fillcolor="#ff0000",
+		label="+",
+		style=filled];
+	25 -> 26;
+	29	 [fillcolor="#ff0000",
+		label=AQ,
+		style=filled];
+	25 -> 29;
+	27	 [fillcolor="#00ff00",
+		label=x3,
+		style=filled];
+	26 -> 27;
+	28	 [fillcolor="#00ff00",
+		label=x1,
+		style=filled];
+	26 -> 28;
+	30	 [fillcolor="#00ff00",
+		label=x4,
+		style=filled];
+	29 -> 30;
+	31	 [fillcolor="#00ff00",
+		label=x4,
+		style=filled];
+	29 -> 31;
+	33	 [fillcolor="#ff0000",
+		label=AQ,
+		style=filled];
+	32 -> 33;
+	48	 [fillcolor="#ff0000",
+		label="*",
+		style=filled];
+	32 -> 48;
+	34	 [fillcolor="#ff0000",
+		label="-",
+		style=filled];
+	33 -> 34;
+	41	 [fillcolor="#ff0000",
+		label=AQ,
+		style=filled];
+	33 -> 41;
+	35	 [fillcolor="#ff0000",
+		label="+",
+		style=filled];
+	34 -> 35;
+	38	 [fillcolor="#ff0000",
+		label="*",
+		style=filled];
+	34 -> 38;
+	36	 [fillcolor="#00ff00",
+		label=x3,
+		style=filled];
+	35 -> 36;
+	37	 [fillcolor="#00ff00",
+		label=x5,
+		style=filled];
+	35 -> 37;
+	39	 [fillcolor="#00ff00",
+		label=x3,
+		style=filled];
+	38 -> 39;
+	40	 [fillcolor="#00ff00",
+		label=x3,
+		style=filled];
+	38 -> 40;
+	42	 [fillcolor="#ff0000",
+		label="-",
+		style=filled];
+	41 -> 42;
+	45	 [fillcolor="#ff0000",
+		label="*",
+		style=filled];
+	41 -> 45;
+	43	 [fillcolor="#00ff00",
+		label=x5,
+		style=filled];
+	42 -> 43;
+	44	 [fillcolor="#00ff00",
+		label=x3,
+		style=filled];
+	42 -> 44;
+	46	 [fillcolor="#00ff00",
+		label=x4,
+		style=filled];
+	45 -> 46;
+	47	 [fillcolor="#00ff00",
+		label=x5,
+		style=filled];
+	45 -> 47;
+	49	 [fillcolor="#ff0000",
+		label="*",
+		style=filled];
+	48 -> 49;
+	56	 [fillcolor="#ff0000",
+		label="*",
+		style=filled];
+	48 -> 56;
+	50	 [fillcolor="#ff0000",
+		label=AQ,
+		style=filled];
+	49 -> 50;
+	53	 [fillcolor="#ff0000",
+		label="+",
+		style=filled];
+	49 -> 53;
+	51	 [fillcolor="#00ff00",
+		label=x5,
+		style=filled];
+	50 -> 51;
+	52	 [fillcolor="#00ff00",
+		label=x4,
+		style=filled];
+	50 -> 52;
+	54	 [fillcolor="#00ff00",
+		label=x4,
+		style=filled];
+	53 -> 54;
+	55	 [fillcolor="#00ff00",
+		label=x1,
+		style=filled];
+	53 -> 55;
+	57	 [fillcolor="#ff0000",
+		label=AQ,
+		style=filled];
+	56 -> 57;
+	60	 [fillcolor="#ff0000",
+		label="-",
+		style=filled];
+	56 -> 60;
+	58	 [fillcolor="#00ff00",
+		label=x5,
+		style=filled];
+	57 -> 58;
+	59	 [fillcolor="#00ff00",
+		label=x3,
+		style=filled];
+	57 -> 59;
+	61	 [fillcolor="#00ff00",
+		label=x1,
+		style=filled];
+	60 -> 61;
+	62	 [fillcolor="#00ff00",
+		label=-0.7151574860468382,
+		style=filled];
+	60 -> 62;
+}

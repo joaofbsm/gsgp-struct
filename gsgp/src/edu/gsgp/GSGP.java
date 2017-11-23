@@ -288,7 +288,7 @@ public class GSGP {
                                                                                 LinkedHashMap::new));
 
             if(repr != null) {
-                bw.write("[" + indHash + "(TR RMSE: " + ind.getTrainingFitnessAsString() + ") -> " +  sortedRepr.toString() + "]\n");
+                bw.write("[" + indHash + "(TR: " + ind.getTrainingFitnessAsString() + ", TS: " + ind.getTestFitnessAsString() + ") -> " +  sortedRepr.toString() + "]\n");
             }
         }
 

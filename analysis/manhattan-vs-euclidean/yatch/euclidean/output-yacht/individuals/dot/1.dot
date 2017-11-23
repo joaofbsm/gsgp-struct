@@ -1,0 +1,10 @@
+strict digraph "" {
+	graph [label=<Frequency = 4.23722E33
+ <br/> <br/> <br/>>,
+		labelloc=t
+	];
+	node [label="\N"];
+	0	 [fillcolor="#00ff00",
+		label=x2,
+		style=filled];
+}

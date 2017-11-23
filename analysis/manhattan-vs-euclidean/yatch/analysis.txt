@@ -1,0 +1,14 @@
+REPR
+----
+
+Manhattan have 15 main subtrees vs. 5 in Euclidean.
+
+FREQUENCY
+---------
+
+Manhattan generates a lot more repetitions, which is really bad for individual reconstruction.
+
+TIME
+----
+
+Manhattan is 50% slowr.

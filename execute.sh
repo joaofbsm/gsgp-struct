@@ -7,8 +7,8 @@
 #bash_version   :GNU bash, version 4.4.0(1)-release
 #========================================================================
 
-datasets=("airfoil" "ccn" "ccun" "concrete" "energyCooling" "energyHeating" "parkinsons" "ppb-wth0s" "towerData" "wineRed" "wineWhite" "yacht")
-#datasets=("yacht")
+#datasets=("airfoil" "ccn" "ccun" "concrete" "energyCooling" "energyHeating" "parkinsons" "ppb-wth0s" "towerData" "wineRed" "wineWhite" "yacht")
+datasets=("yacht")
 gsgp_path="/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/gsgp/out/artifacts/gsgp_jar"
 experiments_path="/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/experiments"
 results_path="/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/results"

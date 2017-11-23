@@ -1,0 +1,130 @@
+strict digraph "" {
+	graph [label=<Frequency = 1.75529E31
+ <br/> <br/> <br/>>,
+		labelloc=t
+	];
+	node [label="\N"];
+	0	 [fillcolor="#ff0000",
+		label="+",
+		style=filled];
+	1	 [fillcolor="#ff0000",
+		label="*",
+		style=filled];
+	0 -> 1;
+	16	 [fillcolor="#ff0000",
+		label="+",
+		style=filled];
+	0 -> 16;
+	2	 [fillcolor="#ff0000",
+		label="+",
+		style=filled];
+	1 -> 2;
+	9	 [fillcolor="#ff0000",
+		label="-",
+		style=filled];
+	1 -> 9;
+	3	 [fillcolor="#ff0000",
+		label=AQ,
+		style=filled];
+	2 -> 3;
+	6	 [fillcolor="#ff0000",
+		label=AQ,
+		style=filled];
+	2 -> 6;
+	4	 [fillcolor="#00ff00",
+		label=x4,
+		style=filled];
+	3 -> 4;
+	5	 [fillcolor="#00ff00",
+		label=x1,
+		style=filled];
+	3 -> 5;
+	7	 [fillcolor="#00ff00",
+		label=x0,
+		style=filled];
+	6 -> 7;
+	8	 [fillcolor="#00ff00",
+		label=x5,
+		style=filled];
+	6 -> 8;
+	10	 [fillcolor="#ff0000",
+		label="+",
+		style=filled];
+	9 -> 10;
+	13	 [fillcolor="#ff0000",
+		label="-",
+		style=filled];
+	9 -> 13;
+	11	 [fillcolor="#00ff00",
+		label=x0,
+		style=filled];
+	10 -> 11;
+	12	 [fillcolor="#00ff00",
+		label=x4,
+		style=filled];
+	10 -> 12;
+	14	 [fillcolor="#00ff00",
+		label=x0,
+		style=filled];
+	13 -> 14;
+	15	 [fillcolor="#00ff00",
+		label=x5,
+		style=filled];
+	13 -> 15;
+	17	 [fillcolor="#ff0000",
+		label="+",
+		style=filled];
+	16 -> 17;
+	24	 [fillcolor="#ff0000",
+		label="*",
+		style=filled];
+	16 -> 24;
+	18	 [fillcolor="#ff0000",
+		label=AQ,
+		style=filled];
+	17 -> 18;
+	21	 [fillcolor="#ff0000",
+		label="-",
+		style=filled];
+	17 -> 21;
+	19	 [fillcolor="#00ff00",
+		label=x2,
+		style=filled];
+	18 -> 19;
+	20	 [fillcolor="#00ff00",
+		label=x5,
+		style=filled];
+	18 -> 20;
+	22	 [fillcolor="#00ff00",
+		label=x4,
+		style=filled];
+	21 -> 22;
+	23	 [fillcolor="#00ff00",
+		label=x5,
+		style=filled];
+	21 -> 23;
+	25	 [fillcolor="#ff0000",
+		label=AQ,
+		style=filled];
+	24 -> 25;
+	28	 [fillcolor="#ff0000",
+		label=AQ,
+		style=filled];
+	24 -> 28;
+	26	 [fillcolor="#00ff00",
+		label=x1,
+		style=filled];
+	25 -> 26;
+	27	 [fillcolor="#00ff00",
+		label=x4,
+		style=filled];
+	25 -> 27;
+	29	 [fillcolor="#00ff00",
+		label=x1,
+		style=filled];
+	28 -> 29;
+	30	 [fillcolor="#00ff00",
+		label=x5,
+		style=filled];
+	28 -> 30;
+}
