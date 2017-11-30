@@ -161,14 +161,14 @@ public class GSGPIndividual extends Individual{
             GSGPIndividual parent1 = (GSGPIndividual) this.getParent1();
             this.addCoefficients(parent1.getReprCoef(), 1.0);
 
-            Integer t1Hash = this.mutationT1.hashCode();
-            Integer t2Hash = this.mutationT2.hashCode();
+            Integer t1Hash = this.mutationT1.toString().hashCode();
+            Integer t2Hash = this.mutationT2.toString().hashCode();
 
             Double storedCoef = this.reprCoef.get(t1Hash);
-            this.reprCoef.put(this.mutationT1.toString().hashCode(), (storedCoef == null) ? this.mutationStep : storedCoef + this.mutationStep);
+            this.reprCoef.put(t1Hash, (storedCoef == null) ? this.mutationStep : storedCoef + this.mutationStep);
 
             storedCoef = this.reprCoef.get(t2Hash);
-            this.reprCoef.put(this.mutationT2.toString().hashCode(), (storedCoef == null) ? (this.mutationStep * -1) : storedCoef + (this.mutationStep * -1));
+            this.reprCoef.put(t2Hash, (storedCoef == null) ? (this.mutationStep * -1) : storedCoef + (this.mutationStep * -1));
         }
     }
 

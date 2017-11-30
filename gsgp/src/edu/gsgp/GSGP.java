@@ -11,6 +11,7 @@ import edu.gsgp.nodes.Node;
 import edu.gsgp.nodes.functions.Add;
 import edu.gsgp.nodes.functions.Function;
 import edu.gsgp.nodes.functions.Mul;
+import edu.gsgp.nodes.functions.Sub;
 import edu.gsgp.nodes.terminals.ERC;
 import edu.gsgp.population.GSGPIndividual;
 import edu.gsgp.population.Population;
@@ -88,17 +89,17 @@ public class GSGP {
             if(bestIndividual.isBestSolution(properties.getMinError())) canStop = true;
             population = newPopulation;
 
-            for(Individual ind : population) {
-                getReprFreq(ind, freqMap, reprMap);
+//            for(Individual ind : population) {
+//                getReprFreq(ind, freqMap, reprMap);
                 //System.out.println(((GSGPIndividual) ind).getReprCoef());
-            }
+//            }
 
-            saveReprs(i, population, reprMap, properties);
+//            saveReprs(i, population, reprMap, properties);
 
             statistics.addGenerationStatistic(population);
         }
 
-
+        /*
         Map<Integer, BigInteger> sortedFreqMap = freqMap.entrySet()
                                                         .stream()
                                                         .sorted(Map.Entry.comparingByValue(Collections.reverseOrder()))
@@ -106,6 +107,7 @@ public class GSGP {
                                                                                   Map.Entry::getValue,
                                                                                   (e1, e2) -> e1,
                                                                                   LinkedHashMap::new));
+
 
 
         saveInds(indMap, sortedFreqMap, properties);
@@ -117,9 +119,17 @@ public class GSGP {
 
         System.out.println(mutationMasks);
 
-        System.out.println(((GSGPIndividual) population.getBestIndividual()).getReprCoef());
+        */
 
-        Node root = reconstructIndividual(population.get(5), indMap, mutationMasks);
+        System.out.println(population.getBestIndividual().getTrainingFitnessAsString());
+        System.out.println(population.getBestIndividual().getTestFitnessAsString());
+        System.out.println();
+
+        Node root = reconstructIndividual(population.get(0), indMap, mutationMasks);
+
+        System.out.println(root);
+        System.out.println(((GSGPIndividual) population.getBestIndividual()).getReprCoef());
+        System.out.println();
 
         SimplePopulator popula = new SimplePopulator(properties);
 
@@ -131,7 +141,9 @@ public class GSGP {
         System.out.println(newInd.getTestFitnessAsString());
 
 
+
         statistics.finishEvolution(population.getBestIndividual());
+
     }
 
     public Statistics getStatistics() {
@@ -374,8 +386,6 @@ public class GSGP {
 
         current.addNode(new ERC(0), 0);
         current.addNode(new ERC(0), 1);
-
-        System.out.println(root);
 
         return root;
 
