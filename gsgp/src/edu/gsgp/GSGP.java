@@ -119,14 +119,14 @@ public class GSGP {
 
         System.out.println(mutationMasks);
 
-        */
-
         System.out.println(population.getBestIndividual().getTrainingFitnessAsString());
         System.out.println(population.getBestIndividual().getTestFitnessAsString());
         System.out.println();
+        */
 
         Node root = reconstructIndividual(population.get(0), indMap, mutationMasks);
 
+        /*
         System.out.println(root);
         System.out.println(((GSGPIndividual) population.getBestIndividual()).getReprCoef());
         System.out.println();
@@ -140,9 +140,7 @@ public class GSGP {
         System.out.println(newInd.getTrainingFitnessAsString());
         System.out.println(newInd.getTestFitnessAsString());
         System.out.println("Size: " + newInd.getTree().getTreeSize());
-
-
-
+        */
 
         statistics.finishEvolution(population.getBestIndividual());
 
