@@ -16,9 +16,10 @@ from matplotlib import rcParams
 
 parser = argparse.ArgumentParser(description="Plotting Tree Frequency in GSGP")
 parser.add_argument("-d", "--dataset")
+parser.add_argument("-a", "--algorithm", default="gsgp")
 args = parser.parse_args()
 
-results_path = "/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/results"
+results_path = "/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/results/" + args.algorithm
 in_file = "{}/{}.txt".format(results_path, args.dataset)
 csv_file = "{}/{}-formated.csv".format(results_path, args.dataset)
 out_path = "{}/output-{}/plots".format(results_path, args.dataset)

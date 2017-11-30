@@ -27,5 +27,8 @@ results-gsgp/
 results-canonical/
 results-gp/
 
+# Output from GP
+out.stat
+
 # Datasets
 datasets/

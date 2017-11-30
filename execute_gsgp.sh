@@ -14,6 +14,8 @@ experiments_path=$(pwd)"/experiments/gsgp"
 results_path=$(pwd)"/results/gsgp"
 scripts_path=$(pwd)"/scripts"
 
+mkdir -p "$results_path"
+
 for dataset in "${datasets[@]}"
 do
     echo "Executing $dataset"
@@ -21,3 +23,5 @@ do
     #python3 "$scripts_path"/plot_freq.py -d "$dataset"
     #python3 "$scripts_path"/plot_ind.py -d "$dataset"
 done
+
+tail -n 9 "$results_path"/*.txt > results.txt

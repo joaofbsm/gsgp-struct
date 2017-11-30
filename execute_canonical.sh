@@ -13,8 +13,12 @@ experiments_path=$(pwd)"/experiments/gsgp-canonical"
 results_path=$(pwd)"/results/gsgp-canonical"
 scripts_path=$(pwd)"/scripts"
 
+mkdir -p "$results_path"
+
 for dataset in "${datasets[@]}"
 do
     echo "Executing $dataset"
     java -Xms512m -Xmx8g -jar "$gsgp_path"/gsgp.jar -p "$experiments_path"/"$dataset"-canonical.txt > "$results_path"/"$dataset".txt
 done
+
+python3 "$scripts_path"/combine_canonical_out.py

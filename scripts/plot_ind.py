@@ -104,7 +104,7 @@ def visualize_individual(repr_, freq, dir_path, name):
 
 
 def main(args):
-    results_dir = "/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/results"
+    results_dir = "/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/results/" + args.algorithm
     dir_path = results_dir + "/output-" + args.dataset +  "/individuals"
 
     if args.file is None:
@@ -122,8 +122,9 @@ def main(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Plotting GSGP Individuals")
+    parser = argparse.ArgumentParser(description="Plotting (GS)GP Individuals")
     parser.add_argument("-d", "--dataset")
+    parser.add_argument("-a", "--algorithm", default="gsgp")
     parser.add_argument("-f", "--file", nargs="?")  # Argument is optional
     args = parser.parse_args()
 

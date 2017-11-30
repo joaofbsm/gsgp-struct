@@ -1,4 +1,4 @@
-experiment.output.dir = /Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/results/
+experiment.output.dir = /Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/results/gsgp/
 experiment.seed = 123456
 tree.build.terminals = edu.gsgp.nodes.terminals.ERC
 tree.build.functions = edu.gsgp.nodes.functions.AQ,edu.gsgp.nodes.functions.Sub,edu.gsgp.nodes.functions.Add,edu.gsgp.nodes.functions.Mul
