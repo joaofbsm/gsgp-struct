@@ -12,6 +12,8 @@ import edu.gsgp.data.PropertiesManager;
 import edu.gsgp.population.Individual;
 import edu.gsgp.population.Population;
 
+import java.util.Map;
+
 /**
  * @author Luiz Otavio Vilas Boas Oliveira
  * http://homepages.dcc.ufmg.br/~luizvbo/ 
@@ -37,6 +39,8 @@ public abstract class Breeder{
     public abstract Breeder softClone(PropertiesManager properties);
     
     public abstract Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData);
+
+    public abstract Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData, Map mutationMasks);
     
     public void setup(Population originalPopulation, ExperimentalData expData){
         this.originalPopulation = originalPopulation;

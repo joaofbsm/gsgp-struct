@@ -12,6 +12,8 @@ import edu.gsgp.data.ExperimentalData;
 import edu.gsgp.data.PropertiesManager;
 import edu.gsgp.population.Individual;
 
+import java.util.Map;
+
 /**
  * @author Luiz Otavio Vilas Boas Oliveira
  * http://homepages.dcc.ufmg.br/~luizvbo/ 
@@ -30,6 +32,11 @@ public class ReproductionBreeder extends Breeder {
 
     @Override
     public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData) {
+        return properties.selectIndividual(originalPopulation, rndGenerator).clone();
+    }
+
+    @Override
+    public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData, Map mutationMasks) {
         return properties.selectIndividual(originalPopulation, rndGenerator).clone();
     }
     

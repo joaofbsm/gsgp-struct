@@ -8,7 +8,12 @@ FREQUENCY
 
 Manhattan generates a lot more repetitions, which is really bad for individual reconstruction.
 
+ACCURACY
+--------
+
+Euclidean is better than Manhattan in both training and test.
+
 TIME
 ----
 
-Manhattan is 50% slowr.
+Manhattan is 50% slower.

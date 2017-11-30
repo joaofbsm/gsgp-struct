@@ -19,6 +19,7 @@ import edu.gsgp.population.fitness.Fitness;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 
 /**
  * Multiplicative Geometric Dispersion Operator
@@ -122,6 +123,11 @@ public class MGDBreeder extends Breeder{
     public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData) {
         GSGPIndividual p = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
         return generateIndividual(rndGenerator, expData, p);
+    }
+
+    @Override
+    public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData, Map mutationMasks) {
+        return properties.selectIndividual(originalPopulation, rndGenerator).clone();
     }
     
     private Fitness evaluate(GSGPIndividual ind, double alpha, ExperimentalData expData){

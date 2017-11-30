@@ -30,7 +30,10 @@ public class ERC implements Terminal{
      * ERC default constructor
      */
     public ERC(){}
-    
+
+    public ERC(double value) {
+        this.value = value;
+    }
     
     // Koza claimed to be generating from [-1.0, 1.0] but he wasn't,
     // given the published simple-lisp code.  It was [-1.0, 1.0).  This is

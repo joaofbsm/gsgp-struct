@@ -18,6 +18,7 @@ import edu.gsgp.population.GSGPIndividual;
 import edu.gsgp.population.Individual;
 import edu.gsgp.population.fitness.Fitness;
 import java.math.BigInteger;
+import java.util.Map;
 
 /**
  * @author Luiz Otavio Vilas Boas Oliveira
@@ -47,8 +48,10 @@ public class GSMBreeder extends Breeder{
                 semInd =  ind.getTestSemantics();
             int instanceIndex = 0;
             for (Instance instance : dataset) {
-                double rtValue = Utils.sigmoid(randomTree1.eval(instance.input));
-                rtValue -= Utils.sigmoid(randomTree2.eval(instance.input));
+                //double rtValue = Utils.sigmoid(randomTree1.eval(instance.input));
+                double rtValue = randomTree1.eval(instance.input);
+                //rtValue -= Utils.sigmoid(randomTree2.eval(instance.input));
+                rtValue -= randomTree2.eval(instance.input);
                 double estimated = semInd[instanceIndex] + properties.getMutationStep() * rtValue;
                 fitnessFunction.setSemanticsAtIndex(estimated, instance.output, instanceIndex++, dataType);
             }
@@ -66,7 +69,22 @@ public class GSMBreeder extends Breeder{
                 add(new BigInteger(rt2.getNumNodes()+"")).
                 add(BigInteger.ONE);
         Fitness fitnessFunction = evaluate(p, rt1, rt2, expData);
-        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p, null, null, rt1, rt2);
+        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p, null, null, rt1, rt2, properties.getMutationStep());
+        return offspring;
+    }
+
+
+    public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData, Map mutationMasks) {
+        GSGPIndividual p = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
+        Node rt1 = properties.getRandomTree(rndGenerator);
+        Node rt2 = properties.getRandomTree(rndGenerator);
+        BigInteger numNodes = p.getNumNodes().add(new BigInteger(rt1.getNumNodes()+"")).
+                add(new BigInteger(rt2.getNumNodes()+"")).
+                add(BigInteger.ONE);
+        Fitness fitnessFunction = evaluate(p, rt1, rt2, expData);
+        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p, null, null, rt1, rt2, properties.getMutationStep());
+        mutationMasks.put(rt1.toString().hashCode(), rt1);
+        mutationMasks.put(rt2.toString().hashCode(), rt2);
         return offspring;
     }
 

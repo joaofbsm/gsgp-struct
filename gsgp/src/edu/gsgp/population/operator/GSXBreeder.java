@@ -18,6 +18,7 @@ import edu.gsgp.population.GSGPIndividual;
 import edu.gsgp.population.Individual;
 import edu.gsgp.population.fitness.Fitness;
 import java.math.BigInteger;
+import java.util.Map;
 
 /**
  * @author Luiz Otavio Vilas Boas Oliveira
@@ -37,7 +38,6 @@ public class GSXBreeder extends Breeder{
     private Fitness evaluate(GSGPIndividual ind1,
                               GSGPIndividual ind2,
                               double rtValue,
-                              //Node randomTree,
                               ExperimentalData expData){
         Fitness fitnessFunction = ind1.getFitnessFunction().softClone();
         for(DatasetType dataType : DatasetType.values()){
@@ -56,8 +56,6 @@ public class GSXBreeder extends Breeder{
             }
             int instanceIndex = 0;
             for (Instance instance : dataset) {
-                //double rtValue = Utils.sigmoid(randomTree.eval(instance.input));
-                //double estimated = rtValue*ind1.getTrainingSemantics()[instanceIndex] + (1-rtValue)*ind2.getTrainingSemantics()[instanceIndex];
                 double estimated = rtValue*semInd1[instanceIndex] + (1-rtValue)*semInd2[instanceIndex];
                 fitnessFunction.setSemanticsAtIndex(estimated, instance.output, instanceIndex++, dataType);
             }
@@ -68,21 +66,33 @@ public class GSXBreeder extends Breeder{
 
     @Override
     public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData) {
-    //public Individual generateIndividualEuclidean(MersenneTwister rndGenerator, ExperimentalData expData) {
         GSGPIndividual p1 = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
         GSGPIndividual p2 = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
         while(p1.equals(p2)) p2 = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
-        // Node rt = properties.getRandomTree(rndGenerator);
         double rt = rndGenerator.nextDouble(true, true);
         BigInteger numNodes = p1.getNumNodes().add(p2.getNumNodes()).add(BigInteger.ONE).add(BigInteger.ONE);
         Fitness fitnessFunction = evaluate(p1, p2, rt, expData);
-        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p1, p2, rt, null, null);
+        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p1, p2, rt, null, null, 0.0);
         return offspring;
     }
 
 
+    public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData, Map mutationMasks) {
+        GSGPIndividual p1 = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
+        GSGPIndividual p2 = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
+        while(p1.equals(p2)) p2 = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
+        double rt = rndGenerator.nextDouble(true, true);
+        BigInteger numNodes = p1.getNumNodes().add(p2.getNumNodes()).add(BigInteger.ONE).add(BigInteger.ONE);
+        Fitness fitnessFunction = evaluate(p1, p2, rt, expData);
+        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p1, p2, rt, null, null, 0.0);
+        return offspring;
+    }
+
+
+
     /*** MANHATTAN SEGMENT CROSSOVER ***/
 
+    /*
     private Fitness evaluate(GSGPIndividual ind1,
                              GSGPIndividual ind2,
                              Node randomTree,
@@ -105,7 +115,6 @@ public class GSXBreeder extends Breeder{
             int instanceIndex = 0;
             for (Instance instance : dataset) {
                 double rtValue = Utils.sigmoid(randomTree.eval(instance.input));
-                //double estimated = rtValue*ind1.getTrainingSemantics()[instanceIndex] + (1-rtValue)*ind2.getTrainingSemantics()[instanceIndex];
                 double estimated = rtValue*semInd1[instanceIndex] + (1-rtValue)*semInd2[instanceIndex];
                 fitnessFunction.setSemanticsAtIndex(estimated, instance.output, instanceIndex++, dataType);
             }
@@ -114,9 +123,8 @@ public class GSXBreeder extends Breeder{
         return fitnessFunction;
     }
 
-    //@Override
-    //public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData) {
-    public Individual generateIndividualManhattan(MersenneTwister rndGenerator, ExperimentalData expData) {
+    @Override
+    public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData) {
         GSGPIndividual p1 = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
         GSGPIndividual p2 = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
         while(p1.equals(p2)) p2 = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
@@ -126,7 +134,7 @@ public class GSXBreeder extends Breeder{
         GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p1, p2, null, null, null);
         return offspring;
     }
-
+    */
 
     @Override
     public Breeder softClone(PropertiesManager properties) {

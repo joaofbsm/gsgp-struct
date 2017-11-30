@@ -7,11 +7,19 @@
 package edu.gsgp;
 
 import edu.gsgp.data.ExperimentalData;
+import edu.gsgp.nodes.Node;
+import edu.gsgp.nodes.functions.Add;
+import edu.gsgp.nodes.functions.Function;
+import edu.gsgp.nodes.functions.Mul;
+import edu.gsgp.nodes.terminals.ERC;
+import edu.gsgp.population.GSGPIndividual;
 import edu.gsgp.population.Population;
 import edu.gsgp.population.Individual;
 import edu.gsgp.data.PropertiesManager;
+import edu.gsgp.population.fitness.Fitness;
 import edu.gsgp.population.populator.Populator;
 import edu.gsgp.population.pipeline.Pipeline;
+import edu.gsgp.population.populator.SimplePopulator;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -42,7 +50,7 @@ public class GSGP {
         statistics = new Statistics(properties.getNumGenerations(), expData);
         rndGenerator = properties.getRandomGenerator();
     }
-    
+
     public void evolve() throws Exception{
         boolean canStop = false;     
         
@@ -61,6 +69,7 @@ public class GSGP {
         Map<Integer, Individual> indMap = new HashMap<>();
         Map<Integer, BigInteger> freqMap = new HashMap<>();
         Map<Integer, HashMap<Integer, BigInteger>> reprMap = new HashMap<>();
+        Map<Integer, Node> mutationMasks = new HashMap<>();
 
         for(Individual ind : population) {
             Integer indHash = ind.hashCode();
@@ -72,7 +81,7 @@ public class GSGP {
             //System.out.println("Generation " + (i+1) + ":");
                         
             // Evolve a new Population
-            Population newPopulation = pipe.evolvePopulation(population, expData, properties.getPopulationSize()-1);
+            Population newPopulation = pipe.evolvePopulation(population, expData, properties.getPopulationSize()-1, mutationMasks);
             // The first position is reserved for the best of the generation (elitism)
             newPopulation.add(population.getBestIndividual());
             Individual bestIndividual = newPopulation.getBestIndividual();
@@ -81,12 +90,14 @@ public class GSGP {
 
             for(Individual ind : population) {
                 getReprFreq(ind, freqMap, reprMap);
+                //System.out.println(((GSGPIndividual) ind).getReprCoef());
             }
 
             saveReprs(i, population, reprMap, properties);
 
             statistics.addGenerationStatistic(population);
         }
+
 
         Map<Integer, BigInteger> sortedFreqMap = freqMap.entrySet()
                                                         .stream()
@@ -96,10 +107,29 @@ public class GSGP {
                                                                                   (e1, e2) -> e1,
                                                                                   LinkedHashMap::new));
 
+
         saveInds(indMap, sortedFreqMap, properties);
 
+        System.out.println();
         System.out.println(sortedFreqMap);
         printPopFitness(initialPopulation);
+        System.out.println();
+
+        System.out.println(mutationMasks);
+
+        System.out.println(((GSGPIndividual) population.getBestIndividual()).getReprCoef());
+
+        Node root = reconstructIndividual(population.get(5), indMap, mutationMasks);
+
+        SimplePopulator popula = new SimplePopulator(properties);
+
+        Fitness fitnessFunction = popula.evaluate(root, expData);
+
+        GSGPIndividual newInd = new GSGPIndividual(root, fitnessFunction);
+
+        System.out.println(newInd.getTrainingFitnessAsString());
+        System.out.println(newInd.getTestFitnessAsString());
+
 
         statistics.finishEvolution(population.getBestIndividual());
     }
@@ -315,4 +345,39 @@ public class GSGP {
 
     }
 
+
+    public Node reconstructIndividual(Individual individual, Map initialPop, Map mutationMasks) {
+        HashMap<Integer, Double> reprCoef = (HashMap<Integer, Double>) ((GSGPIndividual) individual).getReprCoef();
+
+        Add root = new Add();
+
+        Function current = root;
+
+        for(Map.Entry<Integer, Double> entry : reprCoef.entrySet()) {
+            Mul applyCoef = new Mul();
+            current.addNode(applyCoef, 0);
+
+            applyCoef.addNode(new ERC(entry.getValue()), 0);
+
+            Individual subInd = (Individual) initialPop.get(entry.getKey());
+            if(subInd == null) {
+                applyCoef.addNode((Node) mutationMasks.get(entry.getKey()), 1);
+            }
+            else {
+                applyCoef.addNode(subInd.getTree(), 1);
+            }
+
+            Add nextTerm = new Add();
+            current.addNode(nextTerm, 1);
+            current = nextTerm;
+        }
+
+        current.addNode(new ERC(0), 0);
+        current.addNode(new ERC(0), 1);
+
+        System.out.println(root);
+
+        return root;
+
+    }
 }

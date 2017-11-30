@@ -13,6 +13,8 @@ import edu.gsgp.data.PropertiesManager;
 import edu.gsgp.population.Population;
 import edu.gsgp.population.operator.Breeder;
 
+import java.util.Map;
+
 /**
  *
  * @author luiz
@@ -34,6 +36,8 @@ public abstract class Pipeline {
     }
     
     public abstract Population evolvePopulation(Population originalPop, ExperimentalData expData, int size);
+
+    public abstract Population evolvePopulation(Population originalPop, ExperimentalData expData, int size, Map mutationMasks);
 
     public abstract Pipeline softClone();
 }

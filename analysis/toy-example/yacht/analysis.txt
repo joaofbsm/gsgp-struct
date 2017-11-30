@@ -1,0 +1,5 @@
+- No big difference between Manhattan and Euclidean.
+
+- With reduced number of generations and individuals, it is obviously easier to see what is happening with the operators.
+
+- Eventually individuals are all the same representation with different mutations

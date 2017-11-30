@@ -6,8 +6,13 @@
 
 package edu.gsgp.population;
 
+import edu.gsgp.GSGP;
 import edu.gsgp.Utils;
 import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import edu.gsgp.nodes.Node;
 import edu.gsgp.population.fitness.Fitness;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
@@ -23,6 +28,8 @@ public class GSGPIndividual extends Individual{
     private Double crossoverConst;
     private Node mutationT1;
     private Node mutationT2;
+    private double mutationStep;
+    private Map<Integer, Double> reprCoef;
 
     public GSGPIndividual(Node tree, Fitness fitnessFunction){
         super(tree, fitnessFunction);
@@ -38,6 +45,10 @@ public class GSGPIndividual extends Individual{
         this.crossoverConst = null;
         this.mutationT1 = null;
         this.mutationT2 = null;
+        this.mutationStep = 0;
+
+        reprCoef = new HashMap<>();
+        reprCoef.put(this.hashCode(), 1.0);
     }
 
     public GSGPIndividual(Node tree, int numNodes, Fitness fitnessFunction) {
@@ -48,12 +59,19 @@ public class GSGPIndividual extends Individual{
         this(null, numNodes, fitnessFunction);
     }
 
-    public GSGPIndividual(BigInteger numNodes,  Fitness fitnessFunction, GSGPIndividual T1, GSGPIndividual T2, Double crossoverConst, Node mutationT1, Node mutationT2) {
+    public GSGPIndividual(BigInteger numNodes,  Fitness fitnessFunction, GSGPIndividual T1, GSGPIndividual T2, Double crossoverConst, Node mutationT1, Node mutationT2, double mutationStep) {
         super(null, fitnessFunction, T1, T2);
         fitnessFunction.setNumNodes(numNodes);
         this.crossoverConst = crossoverConst;
         this.mutationT1 = mutationT1;
         this.mutationT2 = mutationT2;
+        this.mutationStep = mutationStep;
+
+        //System.out.println(crossoverConst);
+        //System.out.println(mutationStep);
+
+        reprCoef = new HashMap<>();
+        this.propagateCoefficients();
     }
 
     public double eval(double[] input){
@@ -124,5 +142,49 @@ public class GSGPIndividual extends Individual{
     @Override
     public double[] getTestSemantics() {
         return fitnessFunction.getSemantics(Utils.DatasetType.TEST);
+    }
+
+    public Map getReprCoef(){
+        return this.reprCoef;
+    }
+
+    public void propagateCoefficients() {
+        if(this.crossoverConst != null) {  // Crossover offspring
+            GSGPIndividual parent1 = (GSGPIndividual) this.getParent1();
+            this.addCoefficients(parent1.getReprCoef(), this.crossoverConst);
+
+            GSGPIndividual parent2 = (GSGPIndividual) this.getParent2();
+            this.addCoefficients(parent2.getReprCoef(), (1.0 - this.crossoverConst));
+        }
+
+        else {  // Mutation offspring
+            GSGPIndividual parent1 = (GSGPIndividual) this.getParent1();
+            this.addCoefficients(parent1.getReprCoef(), 1.0);
+
+            Integer t1Hash = this.mutationT1.hashCode();
+            Integer t2Hash = this.mutationT2.hashCode();
+
+            Double storedCoef = this.reprCoef.get(t1Hash);
+            this.reprCoef.put(this.mutationT1.toString().hashCode(), (storedCoef == null) ? this.mutationStep : storedCoef + this.mutationStep);
+
+            storedCoef = this.reprCoef.get(t2Hash);
+            this.reprCoef.put(this.mutationT2.toString().hashCode(), (storedCoef == null) ? (this.mutationStep * -1) : storedCoef + (this.mutationStep * -1));
+        }
+    }
+
+
+    public void addCoefficients(Map parentRepr, double multiplyBy) {
+        Iterator it = parentRepr.entrySet().iterator();
+        while(it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+
+            Integer indHash = (Integer) entry.getKey();
+            Double coef = (Double) entry.getValue();
+            Double storedCoef = this.reprCoef.get(indHash);
+
+            coef = coef * multiplyBy;
+
+            this.reprCoef.put(indHash, (storedCoef == null) ? coef : storedCoef + coef);
+        }
     }
 }
