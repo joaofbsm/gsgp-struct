@@ -36,7 +36,7 @@
       <file leaf-file-name="GSGP.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/gsgp/GSGP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
+            <state relative-caret-position="271">
               <caret line="136" column="0" lean-forward="true" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -889,41 +889,11 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <configuration default="false" name="euclidian-energyCooling" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="edu.gsgp.Main" />
-      <option name="VM_PARAMETERS" value="-Xms512m -Xmx8g" />
-      <option name="PROGRAM_PARAMETERS" value="-p $PROJECT_DIR$/../../experiments/energyCooling.txt" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="gsgp" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="euclidian-wineRed" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="edu.gsgp.Main" />
-      <option name="VM_PARAMETERS" value="-Xms512m -Xmx8g" />
-      <option name="PROGRAM_PARAMETERS" value="-p $PROJECT_DIR$/../../experiments/wineRed.txt" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="gsgp" />
-      <envs />
-      <method />
-    </configuration>
     <configuration default="false" name="euclidean-yacht" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="edu.gsgp.Main" />
       <option name="VM_PARAMETERS" value="-Xms512m -Xmx8g" />
-      <option name="PROGRAM_PARAMETERS" value="-p $PROJECT_DIR$/../experiments/yacht.txt" />
+      <option name="PROGRAM_PARAMETERS" value="-p $PROJECT_DIR$/../experiments/gsgp/yacht.txt" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -934,10 +904,8 @@
       <envs />
       <method />
     </configuration>
-    <list size="3">
-      <item index="0" class="java.lang.String" itemvalue="Application.euclidian-energyCooling" />
-      <item index="1" class="java.lang.String" itemvalue="Application.euclidian-wineRed" />
-      <item index="2" class="java.lang.String" itemvalue="Application.euclidean-yacht" />
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Application.euclidean-yacht" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
@@ -973,12 +941,12 @@
       <workItem from="1511190025040" duration="20869000" />
       <workItem from="1511750075352" duration="3365000" />
       <workItem from="1512008814152" duration="24185000" />
-      <workItem from="1512067730479" duration="5615000" />
+      <workItem from="1512067730479" duration="5937000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="148918000" />
+    <option name="totallyTimeSpent" value="149240000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1486,7 +1454,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/gsgp/GSGP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
+        <state relative-caret-position="271">
           <caret line="136" column="0" lean-forward="true" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />

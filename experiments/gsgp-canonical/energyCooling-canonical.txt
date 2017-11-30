@@ -1,4 +1,4 @@
-parent = /Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/experiments/master-canonical.txt
+parent = /Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/experiments/gsgp-canonical/master-canonical.txt
 experiment.data = /Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/datasets/original/energyCooling-train-#.csv
 experiment.data.test = /Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/datasets/original/energyCooling-test-#.csv
 experiment.file.prefix = output-energyCooling

@@ -10,7 +10,7 @@
 datasets=("airfoil" "ccn" "ccun" "concrete" "energyCooling" "energyHeating" "parkinsons" "ppb-wth0s" "towerData" "wineRed" "wineWhite" "yacht")
 gp_path=$(pwd)"/gp"
 datasets_path=$(pwd)"/datasets/original"
-results_path=$(pwd)"/results-gp"
+results_path=$(pwd)"/results/gp"
 
 for dataset in "${datasets[@]}"
 do

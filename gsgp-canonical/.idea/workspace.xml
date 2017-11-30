@@ -653,7 +653,7 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="edu.gsgp.Main" />
       <option name="VM_PARAMETERS" value="-Xms512m -Xmx8g" />
-      <option name="PROGRAM_PARAMETERS" value="-p $PROJECT_DIR$/../experiments/yacht.txt" />
+      <option name="PROGRAM_PARAMETERS" value="-p $PROJECT_DIR$/../experiments/gsgp-canonical/yacht-canonical.txt" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -694,12 +694,12 @@
       <workItem from="1512065507524" duration="479000" />
       <workItem from="1512067609162" duration="114000" />
       <workItem from="1512071873277" duration="903000" />
-      <workItem from="1512074417524" duration="2091000" />
+      <workItem from="1512074417524" duration="2842000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40677000" />
+    <option name="totallyTimeSpent" value="41428000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />

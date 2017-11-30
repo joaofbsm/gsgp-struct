@@ -9,8 +9,8 @@
 
 datasets=("airfoil" "ccn" "ccun" "concrete" "energyCooling" "energyHeating" "parkinsons" "ppb-wth0s" "towerData" "wineRed" "wineWhite" "yacht")
 gsgp_path=$(pwd)"/gsgp-canonical/out/artifacts/gsgp_jar"
-experiments_path=$(pwd)"/experiments"
-results_path=$(pwd)"/results-canonical"
+experiments_path=$(pwd)"/experiments/gsgp-canonical"
+results_path=$(pwd)"/results/gsgp-canonical"
 scripts_path=$(pwd)"/scripts"
 
 for dataset in "${datasets[@]}"

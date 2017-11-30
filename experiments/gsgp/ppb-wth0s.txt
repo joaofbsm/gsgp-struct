@@ -1,4 +1,4 @@
-parent = /Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/experiments/master-canonical.txt
+parent = /Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/experiments/gsgp/master.txt
 experiment.data = /Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/datasets/original/ppb-wth0s-train-#.csv
 experiment.data.test = /Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/datasets/original/ppb-wth0s-test-#.csv
 experiment.file.prefix = output-ppb-wth0s

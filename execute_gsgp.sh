@@ -1,17 +1,17 @@
 #!/bin/bash
-#title          :execute.sh
+#title          :execute_gsgp.sh
 #description    :Execute GSGP for all specified datasets
 #author         :Joao Francisco B. S. Martins
 #date           :17.10.2017
-#usage          :bash execute.sh
+#usage          :bash execute_gsgp.sh
 #bash_version   :GNU bash, version 4.4.0(1)-release
 #==============================================================================
 
 datasets=("airfoil" "ccn" "ccun" "concrete" "energyCooling" "energyHeating" "parkinsons" "ppb-wth0s" "towerData" "wineRed" "wineWhite" "yacht")
 #datasets=("yacht")
-gsgp_path=$(pwd)"/gsgp-canonical/out/artifacts/gsgp_jar"
-experiments_path=$(pwd)"/experiments"
-results_path=$(pwd)"/results-canonical"
+gsgp_path=$(pwd)"/gsgp/out/artifacts/gsgp_jar"
+experiments_path=$(pwd)"/experiments/gsgp"
+results_path=$(pwd)"/results/gsgp"
 scripts_path=$(pwd)"/scripts"
 
 for dataset in "${datasets[@]}"
