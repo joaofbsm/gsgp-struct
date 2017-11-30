@@ -118,29 +118,30 @@ public class GSGP {
         System.out.println();
 
         System.out.println(mutationMasks);
-
-        System.out.println(population.getBestIndividual().getTrainingFitnessAsString());
-        System.out.println(population.getBestIndividual().getTestFitnessAsString());
-        System.out.println();
         */
+
+        NumberFormat formatter = new DecimalFormat("0.###E0");
+
+        System.out.println("Best Individual Size: " + formatter.format(((GSGPIndividual) population.getBestIndividual()).getNumNodes()));
+        System.out.println("Best Individual TR Fitness: " + population.getBestIndividual().getTrainingFitnessAsString());
+        System.out.println("Best Individual TS Fitness: " + population.getBestIndividual().getTestFitnessAsString());
+        System.out.println("---------------------------------------------");
 
         Node root = reconstructIndividual(population.get(0), indMap, mutationMasks);
 
-        /*
-        System.out.println(root);
-        System.out.println(((GSGPIndividual) population.getBestIndividual()).getReprCoef());
-        System.out.println();
+        //System.out.println(root);
+        //System.out.println(((GSGPIndividual) population.getBestIndividual()).getReprCoef());
+        //System.out.println();
 
-        SimplePopulator popula = new SimplePopulator(properties);
+        SimplePopulator simplePopulator = new SimplePopulator(properties);
 
-        Fitness fitnessFunction = popula.evaluate(root, expData);
+        Fitness fitnessFunction = simplePopulator.evaluate(root, expData);
 
         GSGPIndividual newInd = new GSGPIndividual(root, fitnessFunction);
 
-        System.out.println(newInd.getTrainingFitnessAsString());
-        System.out.println(newInd.getTestFitnessAsString());
-        System.out.println("Size: " + newInd.getTree().getTreeSize());
-        */
+        System.out.println("Reconstruction Size: " + formatter.format(newInd.getTree().getTreeSize()));
+        System.out.println("Reconstruction TR Fitness: " + newInd.getTrainingFitnessAsString());
+        System.out.println("Reconstruction TS Fitness: " + newInd.getTestFitnessAsString() + "\n");
 
         statistics.finishEvolution(population.getBestIndividual());
 

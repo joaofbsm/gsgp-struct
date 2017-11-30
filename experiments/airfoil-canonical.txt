@@ -1,0 +1,4 @@
+parent = /Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/experiments/master-canonical.txt
+experiment.data = /Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/datasets/original/airfoil-train-#.csv
+experiment.data.test = /Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/datasets/original/airfoil-test-#.csv
+experiment.file.prefix = output-airfoil
