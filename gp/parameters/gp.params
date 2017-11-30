@@ -1,0 +1,49 @@
+parent.0 = koza.params
+
+pop.subpop.0.species.pipe.num-sources = 2
+pop.subpop.0.species.pipe.source.0 = ec.gp.koza.CrossoverPipeline
+pop.subpop.0.species.pipe.source.0.prob = 0.9
+pop.subpop.0.species.pipe.source.1 = ec.gp.koza.MutationPipeline
+pop.subpop.0.species.pipe.source.1.prob = 0.1
+
+#
+# We specify our problem here
+#
+eval.problem.data = 		ec.app.regression.RegressionData
+eval.problem = 				ec.gp.problems.Regression
+
+gp.tree.print-style = c
+
+# Uncomment to create a .dot for GraphViz
+# gp.tree.print-style = dot
+
+stat.gather-full = 		true
+
+# Don't show best individual information on screen
+stat.do-message = 		false
+
+# Elitism size = 1
+breed.elite.0 =			1
+
+# Avoid cloning the Problem each time
+eval.clone-problem = 	false
+
+# Max depth during mutation and crossover operations (ECJ default = 17)
+gp.koza.mutate.maxdepth = 	7
+gp.koza.xover.maxdepth =  	7
+
+# Grow method used only during subtree generation
+# on mutation operator. 
+gp.koza.grow.min-depth = 5
+gp.koza.grow.max-depth = 5
+
+# Ramped half-half used for generating initial
+# population
+gp.koza.half.min-depth = 2
+gp.koza.half.max-depth = 6
+
+#
+# We define the fitness of an individual to use a 
+# FitnessInterface compatible single objective class
+#
+pop.subpop.0.species.fitness = 		ec.gp.koza.KozaFitness

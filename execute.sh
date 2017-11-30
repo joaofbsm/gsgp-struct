@@ -5,14 +5,14 @@
 #date           :17.10.2017
 #usage          :bash execute.sh
 #bash_version   :GNU bash, version 4.4.0(1)-release
-#========================================================================
+#==============================================================================
 
 datasets=("airfoil" "ccn" "ccun" "concrete" "energyCooling" "energyHeating" "parkinsons" "ppb-wth0s" "towerData" "wineRed" "wineWhite" "yacht")
 #datasets=("yacht")
-gsgp_path="/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/gsgp-canonical/out/artifacts/gsgp_jar"
-experiments_path="/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/experiments"
-results_path="/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/results-canonical"
-scripts_path="/Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/scripts"
+gsgp_path=$(pwd)"/gsgp-canonical/out/artifacts/gsgp_jar"
+experiments_path=$(pwd)"/experiments"
+results_path=$(pwd)"/results-canonical"
+scripts_path=$(pwd)"/scripts"
 
 for dataset in "${datasets[@]}"
 do

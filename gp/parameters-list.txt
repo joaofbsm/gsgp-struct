@@ -1,0 +1,46 @@
+You must set the mandatory parameters. Available options (* indicates a mandatory option):
+  -v <int>
+     * SSR version.
+  -p <file path>
+     * Path to the parameter file.
+  -i <file path>
+     * Path to the training file.
+  -I <file path>
+     Path to the test file (optional).
+  -T <file path>
+     * Path to the test file (optional).
+  -o <file path>
+     Path to the output files.
+  -s <file path>
+     Path to a file with a list of seeds to use during iterations.
+  -a <prefix string>
+     Identifier prefix for files.
+  -t <int>
+     Number of threads (for parallel execution).  -g <int>
+     Maximum number of iterations (default = 10).
+  -n <int>
+     Number of repetitions of the algorithm (default = 1).
+  -k <int>
+     Number of folds (cross-validation).
+  -b <double>
+     If the value is in [0,1], defines percentage used for test in holdout validation.
+     If the value is bigger than 1, defines absolute quatity used for test in holdout validation.
+  -e <int>
+     Minimun error to compute a hit (default = 0.0).
+  -ss <int>
+     Strip size for version 10.
+  -nf <int>
+     Number of folds for version 10.
+  -C
+     Uses splited data from files for cross-validation. Use a path to the files in the form
+     /pathToFile/repeatedName#repeatedName, where # indicates where the fold index is placed
+     (a number from 0 to k-1), e.g. /home/iris-#.dat, with 3 folds in the path will look for
+     iris-0.dat, iris-1.dat and iris-2.dat
+  -B
+     Uses sampled data from files for holdout. Use a path to the files in the form
+     /pathToFile/repeatedName#repeatedName, where # is composed by the pattern      (train|test)-i with i=0,1,...,n-1, where n is the number of experiment files,
+     e.g. /home/iris-#.dat, with 4 files (2x(train+test)) in the path will look for
+     iris-train-0.dat, iris-test-0.dat, iris-train-1.dat and iris-test-0.dat
+  -u
+    Uses unshuffled data.
+

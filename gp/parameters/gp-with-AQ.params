@@ -1,0 +1,5 @@
+parent.0 = 626inputs.params
+
+# Replaces the dividion (func.4) by AQ
+gp.fs.0.func.4 = ec.gp.functions.AQ
+gp.fs.0.func.4.nc = nc2

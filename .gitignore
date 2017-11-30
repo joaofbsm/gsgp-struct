@@ -24,6 +24,7 @@ hs_err_pid*
 # Execution outputs
 results/
 results-canonical/
+results-gp/
 
 # Datasets
 datasets/
