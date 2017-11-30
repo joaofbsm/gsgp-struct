@@ -18,4 +18,5 @@ import edu.gsgp.nodes.Node;
 public interface Terminal extends Node{
 //    public void setup(MersenneTwister rnd);
     public Terminal softClone(MersenneTwister rnd);
+
 }

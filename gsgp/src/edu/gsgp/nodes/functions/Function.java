@@ -64,4 +64,10 @@ public abstract class Function implements Node{
     public final int getParentArgPosition() {
         return parentArgPosition;
     }
+
+
+    @Override
+    public int getTreeSize() {
+        return arguments[0].getTreeSize() + arguments[1].getTreeSize();
+    }
 }

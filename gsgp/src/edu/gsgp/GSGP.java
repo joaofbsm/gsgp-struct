@@ -139,6 +139,8 @@ public class GSGP {
 
         System.out.println(newInd.getTrainingFitnessAsString());
         System.out.println(newInd.getTestFitnessAsString());
+        System.out.println("Size: " + newInd.getTree().getTreeSize());
+
 
 
 
