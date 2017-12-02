@@ -8,10 +8,7 @@ package edu.gsgp;
 
 import edu.gsgp.data.ExperimentalData;
 import edu.gsgp.nodes.Node;
-import edu.gsgp.nodes.functions.Add;
-import edu.gsgp.nodes.functions.Function;
-import edu.gsgp.nodes.functions.Mul;
-import edu.gsgp.nodes.functions.Sub;
+import edu.gsgp.nodes.functions.*;
 import edu.gsgp.nodes.terminals.ERC;
 import edu.gsgp.population.GSGPIndividual;
 import edu.gsgp.population.Population;
@@ -125,13 +122,14 @@ public class GSGP {
         System.out.println("Best Individual Size: " + formatter.format(((GSGPIndividual) population.getBestIndividual()).getNumNodes()));
         System.out.println("Best Individual TR Fitness: " + population.getBestIndividual().getTrainingFitnessAsString());
         System.out.println("Best Individual TS Fitness: " + population.getBestIndividual().getTestFitnessAsString());
+
         System.out.println("---------------------------------------------");
 
         Node root = reconstructIndividual(population.get(0), indMap, mutationMasks);
 
-        //System.out.println(root);
-        //System.out.println(((GSGPIndividual) population.getBestIndividual()).getReprCoef());
-        //System.out.println();
+        System.out.println(root);
+        System.out.println(((GSGPIndividual) population.getBestIndividual()).getReprCoef());
+        System.out.println();
 
         SimplePopulator simplePopulator = new SimplePopulator(properties);
 

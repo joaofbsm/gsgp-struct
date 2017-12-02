@@ -24,4 +24,4 @@ do
     #python3 "$scripts_path"/plot_ind.py -d "$dataset"
 done
 
-tail -n 9 "$results_path"/*.txt > results.txt
+tail -n 9 "$results_path"/*.txt > "$results_path"/results.txt
