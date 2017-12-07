@@ -36,7 +36,7 @@ public class SimplePopulator extends Populator{
      * @param newTree The tree to be evaluated
      * @return The fitness of the input tree
      */
-    public Fitness evaluate(Node newTree, ExperimentalData expData){
+    private Fitness evaluate(Node newTree, ExperimentalData expData){
         Fitness fitnessFunction = properties.geFitnessFunction();
         for(DatasetType dataType : DatasetType.values()){
             // Compute the (training/test) semantics of generated random tree

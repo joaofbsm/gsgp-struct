@@ -4,8 +4,7 @@
 
 __author__ = "João Francisco Barreto da Silva Martins"
 __email__ = "joaofbsm@dcc.ufmg.br"
-__license__ = "GPL"
-__version__ = "3.0"
+__license__ = "MIT"
 
 import os
 import argparse

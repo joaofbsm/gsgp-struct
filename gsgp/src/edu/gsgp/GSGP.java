@@ -6,7 +6,9 @@
 
 package edu.gsgp;
 
+import edu.gsgp.data.Dataset;
 import edu.gsgp.data.ExperimentalData;
+import edu.gsgp.data.Instance;
 import edu.gsgp.nodes.Node;
 import edu.gsgp.nodes.functions.*;
 import edu.gsgp.nodes.terminals.ERC;
@@ -17,7 +19,6 @@ import edu.gsgp.data.PropertiesManager;
 import edu.gsgp.population.fitness.Fitness;
 import edu.gsgp.population.populator.Populator;
 import edu.gsgp.population.pipeline.Pipeline;
-import edu.gsgp.population.populator.SimplePopulator;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -64,14 +65,14 @@ public class GSGP {
 
         Population initialPopulation = population;
 
-        Map<Integer, Individual> indMap = new HashMap<>();
+        Map<Integer, Individual> initialInds = new HashMap<>();
         Map<Integer, BigInteger> freqMap = new HashMap<>();
         Map<Integer, HashMap<Integer, BigInteger>> reprMap = new HashMap<>();
         Map<Integer, Node> mutationMasks = new HashMap<>();
 
         for(Individual ind : population) {
             Integer indHash = ind.hashCode();
-            indMap.put(indHash, ind);
+            initialInds.put(indHash, ind);
             freqMap.put(indHash, BigInteger.valueOf(0));
         }
         
@@ -86,12 +87,14 @@ public class GSGP {
             if(bestIndividual.isBestSolution(properties.getMinError())) canStop = true;
             population = newPopulation;
 
-//            for(Individual ind : population) {
-//                getReprFreq(ind, freqMap, reprMap);
-                //System.out.println(((GSGPIndividual) ind).getReprCoef());
-//            }
+            /*
+            for(Individual ind : population) {
+                getReprFreq(ind, freqMap, reprMap);
+                System.out.println(((GSGPIndividual) ind).getReprCoef());
+            }
 
-//            saveReprs(i, population, reprMap, properties);
+            saveReprs(i, population, reprMap, properties);
+            */
 
             statistics.addGenerationStatistic(population);
         }
@@ -107,7 +110,7 @@ public class GSGP {
 
 
 
-        saveInds(indMap, sortedFreqMap, properties);
+        saveInds(initialInds, sortedFreqMap, properties);
 
         System.out.println();
         System.out.println(sortedFreqMap);
@@ -115,7 +118,14 @@ public class GSGP {
         System.out.println();
 
         System.out.println(mutationMasks);
+
         */
+
+        Node root = reconstructIndividual(population.get(0), initialInds, mutationMasks);
+
+        Fitness fitnessFunction = evaluate(root, expData);
+
+        GSGPIndividual newInd = new GSGPIndividual(root, fitnessFunction);
 
         NumberFormat formatter = new DecimalFormat("0.###E0");
 
@@ -125,17 +135,9 @@ public class GSGP {
 
         System.out.println("---------------------------------------------");
 
-        Node root = reconstructIndividual(population.get(0), indMap, mutationMasks);
-
-        System.out.println(root);
-        System.out.println(((GSGPIndividual) population.getBestIndividual()).getReprCoef());
-        System.out.println();
-
-        SimplePopulator simplePopulator = new SimplePopulator(properties);
-
-        Fitness fitnessFunction = simplePopulator.evaluate(root, expData);
-
-        GSGPIndividual newInd = new GSGPIndividual(root, fitnessFunction);
+//        System.out.println(root);
+//        System.out.println(((GSGPIndividual) population.getBestIndividual()).getReprCoef());
+//        System.out.println();
 
         System.out.println("Reconstruction Size: " + formatter.format(newInd.getTree().getTreeSize()));
         System.out.println("Reconstruction TR Fitness: " + newInd.getTrainingFitnessAsString());
@@ -232,12 +234,12 @@ public class GSGP {
 
     /**
      *
-     * @param indMap
+     * @param initialInds
      * @param sortedFreqMap
      * @param properties
      * @throws IOException
      */
-    public void saveInds(Map indMap, Map sortedFreqMap, PropertiesManager properties) throws IOException {
+    public void saveInds(Map initialInds, Map sortedFreqMap, PropertiesManager properties) throws IOException {
         BigInteger threshold = (BigInteger.valueOf((int) java.lang.Math.pow(10, 20)));
 
         Iterator it = sortedFreqMap.entrySet().iterator();
@@ -247,7 +249,7 @@ public class GSGP {
 
         Integer indHash = (Integer) first.getKey();
         BigInteger lastFreq = (BigInteger) first.getValue();
-        Individual ind = (Individual) indMap.get(indHash);
+        Individual ind = (Individual) initialInds.get(indHash);
 
         saveInd(ind.toString(), i, lastFreq, properties);
         i += 1;
@@ -260,7 +262,7 @@ public class GSGP {
 
             // freq is bigger than the threshold
             if (lastFreq.divide(threshold).compareTo(freq) == -1) {
-                ind = (Individual) indMap.get(indHash);
+                ind = (Individual) initialInds.get(indHash);
                 saveInd(ind.toString(), i, freq, properties);
 
                 lastFreq = freq;
@@ -336,7 +338,10 @@ public class GSGP {
         bw.close();
     }
 
-
+    /**
+     * 
+     * @param population
+     */
     public void printPopFitness(Population population) {
         Map<Integer, Double> rmseMap = new HashMap<>();
 
@@ -356,7 +361,13 @@ public class GSGP {
 
     }
 
-
+    /**
+     *
+     * @param individual
+     * @param initialPop
+     * @param mutationMasks
+     * @return
+     */
     public Node reconstructIndividual(Individual individual, Map initialPop, Map mutationMasks) {
         HashMap<Integer, Double> reprCoef = (HashMap<Integer, Double>) ((GSGPIndividual) individual).getReprCoef();
 
@@ -388,5 +399,27 @@ public class GSGP {
 
         return root;
 
+    }
+
+    /**
+     *
+     * @param newTree
+     * @param expData
+     * @return
+     */
+    public Fitness evaluate(Node newTree, ExperimentalData expData){
+        Fitness fitnessFunction = properties.geFitnessFunction();
+        for(Utils.DatasetType dataType : Utils.DatasetType.values()){
+            // Compute the (training/test) semantics of generated random tree
+            fitnessFunction.resetFitness(dataType, expData);
+            Dataset dataset = expData.getDataset(dataType);
+            int instanceIndex = 0;
+            for (Instance instance : dataset) {
+                double estimated = newTree.eval(instance.input);
+                fitnessFunction.setSemanticsAtIndex(estimated, instance.output, instanceIndex++, dataType);
+            }
+            fitnessFunction.computeFitness(dataType);
+        }
+        return fitnessFunction;
     }
 }
