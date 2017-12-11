@@ -21,7 +21,7 @@ import edu.gsgp.population.fitness.Fitness;
  * @author Luiz Otavio Vilas Boas Oliveira
  * http://homepages.dcc.ufmg.br/~luizvbo/ 
  * luiz.vbo@gmail.com
- * Copyright (C) 20014, Federal University of Minas Gerais, Belo Horizonte, Brazil
+ * Copyright (C) 2014, Federal University of Minas Gerais, Belo Horizonte, Brazil
  * 
  * Generate a population using the tree initialization method given in the parameter file
  */
@@ -37,7 +37,7 @@ public class SimplePopulator extends Populator{
      * @return The fitness of the input tree
      */
     private Fitness evaluate(Node newTree, ExperimentalData expData){
-        Fitness fitnessFunction = properties.geFitnessFunction();
+        Fitness fitnessFunction = properties.getFitnessFunction();
         for(DatasetType dataType : DatasetType.values()){
             // Compute the (training/test) semantics of generated random tree
             fitnessFunction.resetFitness(dataType, expData);

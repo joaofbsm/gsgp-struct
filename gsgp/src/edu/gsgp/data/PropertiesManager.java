@@ -45,7 +45,7 @@ import java.lang.reflect.Constructor;
  * http://homepages.dcc.ufmg.br/~luizvbo/ 
  * luiz.vbo@gmail.com
  * 
- * Copyright (C) 20014, Federal University of Minas Gerais, Belo Horizonte, Brazil
+ * Copyright (C) 2014, Federal University of Minas Gerais, Belo Horizonte, Brazil
  * 
  * This class load the parameters from the file and instantiate the objects used 
  * in the GSGP
@@ -730,7 +730,7 @@ public class PropertiesManager {
         return filePrefix;
     }
     
-    public Fitness geFitnessFunction(){
+    public Fitness getFitnessFunction(){
         return fitnessFunction.softClone();
     }
     

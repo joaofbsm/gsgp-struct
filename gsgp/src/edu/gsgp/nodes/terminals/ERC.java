@@ -13,7 +13,7 @@ import edu.gsgp.nodes.Node;
  * @author Luiz Otavio Vilas Boas Oliveira
  * http://homepages.dcc.ufmg.br/~luizvbo/ 
  * luiz.vbo@gmail.com
- * Copyright (C) 20014, Federal University of Minas Gerais, Belo Horizonte, Brazil
+ * Copyright (C) 2014, Federal University of Minas Gerais, Belo Horizonte, Brazil
  * 
  * Ephemeral Random Constant (Koza J. R. Genetic Programming: On the Programming 
  * of Computers by Means of Natural Selection. 1992). Every time this terminal 

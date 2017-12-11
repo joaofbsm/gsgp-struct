@@ -25,7 +25,7 @@ import edu.gsgp.population.fitness.Fitness;
  * @author Luiz Otavio Vilas Boas Oliveira
  * http://homepages.dcc.ufmg.br/~luizvbo/ 
  * luiz.vbo@gmail.com
- * Copyright (C) 20014, Federal University of Minas Gerais, Belo Horizonte, Brazil
+ * Copyright (C) 2014, Federal University of Minas Gerais, Belo Horizonte, Brazil
  *
  * Semantic Driven Initialization (SDI). See "Beadle, L. Semantic and Structural 
  * Analysis of Genetic Programming Computing, University of Kent, 2009, 182-196"
@@ -43,7 +43,7 @@ public class SDIPopulator extends Populator{
      * @return The computed fitness function w.r.t. the evaluated individual
      */
     private Fitness evaluate(Node newTree, ExperimentalData expData){
-        Fitness fitnessFunction = properties.geFitnessFunction();
+        Fitness fitnessFunction = properties.getFitnessFunction();
         for(DatasetType dataType : DatasetType.values()){
             // Compute the (training/test) semantics of generated random tree
             fitnessFunction.resetFitness(dataType, expData);

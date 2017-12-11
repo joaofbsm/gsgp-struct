@@ -13,7 +13,7 @@ import edu.gsgp.Utils;
  * @author Luiz Otavio Vilas Boas Oliveira
  * http://homepages.dcc.ufmg.br/~luizvbo/ 
  * luiz.vbo@gmail.com
- * Copyright (C) 20014, Federal University of Minas Gerais, Belo Horizonte, Brazil
+ * Copyright (C) 2014, Federal University of Minas Gerais, Belo Horizonte, Brazil
  */
 public class CrossvalidationHandler implements DataProducer{
     /** Curretn fold. Used to return a training/test set.*/

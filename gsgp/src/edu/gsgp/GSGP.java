@@ -35,13 +35,15 @@ import java.util.stream.Collectors;
  * @author Luiz Otavio Vilas Boas Oliveira
  * http://homepages.dcc.ufmg.br/~luizvbo/ 
  * luiz.vbo@gmail.com
- * Copyright (C) 20014, Federal University of Minas Gerais, Belo Horizonte, Brazil
+ * Copyright (C) 2014, Federal University of Minas Gerais, Belo Horizonte, Brazil
  */
+
 public class GSGP {
     private final PropertiesManager properties;
     private final Statistics statistics;
     private final ExperimentalData expData;
     private final MersenneTwister rndGenerator;
+
 
     public GSGP(PropertiesManager properties, ExperimentalData expData) throws Exception{
         this.properties = properties;
@@ -50,109 +52,97 @@ public class GSGP {
         rndGenerator = properties.getRandomGenerator();
     }
 
+
     public void evolve() throws Exception{
-        boolean canStop = false;     
-        
+        statistics.startClock();
+
+        // Early stopping flag
+        boolean canStop = false;
+
+        // Initialize auxiliary structures
         Populator populator = properties.getPopulationInitializer();
         Pipeline pipe = properties.getPipeline();
-        
-        statistics.startClock();
-        
-        Population population = populator.populate(rndGenerator, expData, properties.getPopulationSize());
         pipe.setup(properties, statistics, expData, rndGenerator);
-        
+
+        // Generate initial population
+        Population population = populator.populate(rndGenerator, expData, properties.getPopulationSize());
+
         statistics.addGenerationStatistic(population);
 
-        Population initialPopulation = population;
-
+        // Maps between Objects and hashCodes used in individual reconstruction
         Map<Integer, Individual> initialInds = new HashMap<>();
-        Map<Integer, BigInteger> freqMap = new HashMap<>();
-        Map<Integer, HashMap<Integer, BigInteger>> reprMap = new HashMap<>();
         Map<Integer, Node> mutationMasks = new HashMap<>();
 
+        // Maps initial individuals' Object to hashCode
         for(Individual ind : population) {
             Integer indHash = ind.hashCode();
             initialInds.put(indHash, ind);
-            freqMap.put(indHash, BigInteger.valueOf(0));
         }
         
         for(int i = 0; i < properties.getNumGenerations() && !canStop; i++){
-            //System.out.println("Generation " + (i+1) + ":");
-                        
             // Evolve a new Population
             Population newPopulation = pipe.evolvePopulation(population, expData, properties.getPopulationSize()-1, mutationMasks);
+
             // The first position is reserved for the best of the generation (elitism)
             newPopulation.add(population.getBestIndividual());
+
+            // Check stopping criterion
             Individual bestIndividual = newPopulation.getBestIndividual();
             if(bestIndividual.isBestSolution(properties.getMinError())) canStop = true;
+
+            // Update the population
             population = newPopulation;
 
-            /*
-            for(Individual ind : population) {
-                getReprFreq(ind, freqMap, reprMap);
-                System.out.println(((GSGPIndividual) ind).getReprCoef());
-            }
-
-            saveReprs(i, population, reprMap, properties);
-            */
-
+            // Save statistics to file
             statistics.addGenerationStatistic(population);
         }
 
-        /*
-        Map<Integer, BigInteger> sortedFreqMap = freqMap.entrySet()
-                                                        .stream()
-                                                        .sorted(Map.Entry.comparingByValue(Collections.reverseOrder()))
-                                                        .collect(Collectors.toMap(Map.Entry::getKey,
-                                                                                  Map.Entry::getValue,
-                                                                                  (e1, e2) -> e1,
-                                                                                  LinkedHashMap::new));
+        // Reconstruct best individual
+        Node reconstructedTree = reconstructIndividual(population.get(0), initialInds, mutationMasks);
+        Fitness fitnessFunction = reconstructedTree.evaluateFitness(expData, properties);
+        GSGPIndividual reconstructedInd = new GSGPIndividual(reconstructedTree, fitnessFunction);
 
+        // Print equivalent trees' size for comparison
+        System.out.println("Best Individual Size: " + ((GSGPIndividual) population.getBestIndividual()).getNumNodes());
+        System.out.println("Reconstruction Size: " + reconstructedInd.getTree().getTreeSize() + "\n");;
 
+        /******* EXTRA DATA *******
 
-        saveInds(initialInds, sortedFreqMap, properties);
-
-        System.out.println();
-        System.out.println(sortedFreqMap);
-        printPopFitness(initialPopulation);
-        System.out.println();
-
-        System.out.println(mutationMasks);
-
-        */
-
-        Node root = reconstructIndividual(population.get(0), initialInds, mutationMasks);
-
-        Fitness fitnessFunction = evaluate(root, expData);
-
-        GSGPIndividual newInd = new GSGPIndividual(root, fitnessFunction);
-
+        // Print sizes in scientific notation
         NumberFormat formatter = new DecimalFormat("0.###E0");
 
+        // Print trees features
         System.out.println("Best Individual Size: " + formatter.format(((GSGPIndividual) population.getBestIndividual()).getNumNodes()));
         System.out.println("Best Individual TR Fitness: " + population.getBestIndividual().getTrainingFitnessAsString());
         System.out.println("Best Individual TS Fitness: " + population.getBestIndividual().getTestFitnessAsString());
-
         System.out.println("---------------------------------------------");
-
-//        System.out.println(root);
-//        System.out.println(((GSGPIndividual) population.getBestIndividual()).getReprCoef());
-//        System.out.println();
-
         System.out.println("Reconstruction Size: " + formatter.format(newInd.getTree().getTreeSize()));
         System.out.println("Reconstruction TR Fitness: " + newInd.getTrainingFitnessAsString());
         System.out.println("Reconstruction TS Fitness: " + newInd.getTestFitnessAsString() + "\n");
 
-        statistics.finishEvolution(population.getBestIndividual());
+        // Print reconstructed tree representations
+        System.out.println(reconstructedTree);
+        System.out.println(((GSGPIndividual) population.getBestIndividual()).getReprCoef() + "\n");
 
+         **************************/
+
+        // Save best individual's statistics to file
+        statistics.finishEvolution(population.getBestIndividual());
     }
 
+
+    /**
+     * Get statistics for current GSGP instance.
+     *
+     * @return
+     */
     public Statistics getStatistics() {
         return statistics;
     }
 
 
     /**
+     * Get the individual representation based in the frequency of trees in its parents' representation.
      *
      * @param ind
      * @param freqMap
@@ -166,7 +156,9 @@ public class GSGP {
         addInd(parent2, freqMap, reprMap);
     }
 
+
     /**
+     * Include individual representation to reprMap if not present and add its representation frequencies to the total.
      *
      * @param ind
      * @param freqMap
@@ -186,15 +178,20 @@ public class GSGP {
         }
     }
 
+
     /**
+     * Links individual's frequency map and its hashCode into a representation map.
      *
      * @param reprMap
      * @param ind
      */
     public void addRepr(Map reprMap, Individual ind) {
+        // This is a freqMap for the individual representation, not the global freqMap
         Map<Integer, BigInteger> freqMap = new HashMap<>();
+
         Individual parent1 = ind.getParent1();
         Individual parent2 = ind.getParent2();
+
         Integer indHash = ind.hashCode();
 
         reprMap.put(indHash, freqMap);
@@ -214,7 +211,9 @@ public class GSGP {
         }
     }
 
+
     /**
+     * Adds the frequency of an individual's representation to a given frequency map.
      *
      * @param freqMap
      * @param repr
@@ -232,7 +231,9 @@ public class GSGP {
         }
     }
 
+
     /**
+     * Save to file all the initial individuals' tree toString representation and its frequency of appearance.
      *
      * @param initialInds
      * @param sortedFreqMap
@@ -275,7 +276,9 @@ public class GSGP {
         }
     }
 
+
     /**
+     * Save individual's tree toString representation and its frequency.
      *
      * @param ind
      * @param i
@@ -297,7 +300,9 @@ public class GSGP {
         bw.close();
     }
 
+
     /**
+     * Save to file the representation, based on the initial trees, of an entire population.
      *
      * @param population
      * @param reprMap
@@ -338,8 +343,10 @@ public class GSGP {
         bw.close();
     }
 
+
     /**
-     * 
+     * Print the fitness of the entire population in ascending order.
+     *
      * @param population
      */
     public void printPopFitness(Population population) {
@@ -361,7 +368,9 @@ public class GSGP {
 
     }
 
+
     /**
+     * Reconstruct an equivalent tree based in the individual's coefficient representation.
      *
      * @param individual
      * @param initialPop
@@ -398,28 +407,5 @@ public class GSGP {
         current.addNode(new ERC(0), 1);
 
         return root;
-
-    }
-
-    /**
-     *
-     * @param newTree
-     * @param expData
-     * @return
-     */
-    public Fitness evaluate(Node newTree, ExperimentalData expData){
-        Fitness fitnessFunction = properties.geFitnessFunction();
-        for(Utils.DatasetType dataType : Utils.DatasetType.values()){
-            // Compute the (training/test) semantics of generated random tree
-            fitnessFunction.resetFitness(dataType, expData);
-            Dataset dataset = expData.getDataset(dataType);
-            int instanceIndex = 0;
-            for (Instance instance : dataset) {
-                double estimated = newTree.eval(instance.input);
-                fitnessFunction.setSemanticsAtIndex(estimated, instance.output, instanceIndex++, dataType);
-            }
-            fitnessFunction.computeFitness(dataType);
-        }
-        return fitnessFunction;
     }
 }

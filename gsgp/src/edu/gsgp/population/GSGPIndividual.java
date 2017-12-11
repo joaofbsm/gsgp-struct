@@ -21,7 +21,7 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
  * @author Luiz Otavio Vilas Boas Oliveira
  * http://homepages.dcc.ufmg.br/~luizvbo/ 
  * luiz.vbo@gmail.com
- * Copyright (C) 20014, Federal University of Minas Gerais, Belo Horizonte, Brazil
+ * Copyright (C) 2014, Federal University of Minas Gerais, Belo Horizonte, Brazil
  */
 public class GSGPIndividual extends Individual{
 
@@ -61,14 +61,13 @@ public class GSGPIndividual extends Individual{
 
     public GSGPIndividual(BigInteger numNodes,  Fitness fitnessFunction, GSGPIndividual T1, GSGPIndividual T2, Double crossoverConst, Node mutationT1, Node mutationT2, double mutationStep) {
         super(null, fitnessFunction, T1, T2);
+
         fitnessFunction.setNumNodes(numNodes);
+
         this.crossoverConst = crossoverConst;
         this.mutationT1 = mutationT1;
         this.mutationT2 = mutationT2;
         this.mutationStep = mutationStep;
-
-        //System.out.println(crossoverConst);
-        //System.out.println(mutationStep);
 
         reprCoef = new HashMap<>();
         this.propagateCoefficients();
@@ -148,6 +147,10 @@ public class GSGPIndividual extends Individual{
         return this.reprCoef;
     }
 
+
+    /**
+     * Propagate coefficients from individual's "recipe".
+     */
     public void propagateCoefficients() {
         if(this.crossoverConst != null) {  // Crossover offspring
             GSGPIndividual parent1 = (GSGPIndividual) this.getParent1();
@@ -173,11 +176,14 @@ public class GSGPIndividual extends Individual{
     }
 
 
+    /**
+     * Add coefficients from a parent's representation times a constant to this individual representation.
+     *
+     * @param parentRepr
+     * @param multiplyBy
+     */
     public void addCoefficients(Map parentRepr, double multiplyBy) {
-        Iterator it = parentRepr.entrySet().iterator();
-        while(it.hasNext()) {
-            Map.Entry entry = (Map.Entry) it.next();
-
+        for(Map.Entry<Integer, Double> entry : ((HashMap<Integer, Double>) parentRepr).entrySet()) {
             Integer indHash = (Integer) entry.getKey();
             Double coef = (Double) entry.getValue();
             Double storedCoef = this.reprCoef.get(indHash);
