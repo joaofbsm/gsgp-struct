@@ -22,10 +22,6 @@ import edu.gsgp.population.fitness.Fitness;
  */
 public class GSGPIndividual extends Individual{
 
-    private Double crossoverConst;
-    private Integer mutationT1;
-    private Integer mutationT2;
-    private double mutationStep;
     private Map<Integer, Double> reprCoef;
 
     public GSGPIndividual(Node tree, Fitness fitnessFunction){
@@ -39,11 +35,8 @@ public class GSGPIndividual extends Individual{
     public GSGPIndividual(Node tree, BigInteger numNodes, Fitness fitnessFunction) {
         super(tree, fitnessFunction);
         fitnessFunction.setNumNodes(numNodes);
-        this.crossoverConst = null;
-        this.mutationT1 = null;
-        this.mutationT2 = null;
-        this.mutationStep = 0;
 
+        // Individual belongs to the initial population
         reprCoef = new HashMap<>();
         reprCoef.put(this.hashCode(), 1.0);
     }
@@ -57,17 +50,12 @@ public class GSGPIndividual extends Individual{
     }
 
     public GSGPIndividual(BigInteger numNodes,  Fitness fitnessFunction, GSGPIndividual T1, GSGPIndividual T2, Double crossoverConst, Integer mutationT1, Integer mutationT2, double mutationStep) {
-        super(null, fitnessFunction, T1, T2);
+        super(null, fitnessFunction);
 
         fitnessFunction.setNumNodes(numNodes);
 
-        this.crossoverConst = crossoverConst;
-        this.mutationT1 = mutationT1;
-        this.mutationT2 = mutationT2;
-        this.mutationStep = mutationStep;
-
         reprCoef = new HashMap<>();
-        this.propagateCoefficients();
+        this.propagateCoefficients(T1, T2, crossoverConst, mutationT1, mutationT2, mutationStep);
     }
 
     public double eval(double[] input){
@@ -147,25 +135,25 @@ public class GSGPIndividual extends Individual{
 
     /**
      * Propagate coefficients from individual's "recipe".
+     *
+     * @param parent1
+     * @param parent2
      */
-    public void propagateCoefficients() {
-        if(this.crossoverConst != null) {  // Crossover offspring
-            GSGPIndividual parent1 = (GSGPIndividual) this.getParent1();
-            this.addCoefficients(parent1.getReprCoef(), this.crossoverConst);
+    public void propagateCoefficients(GSGPIndividual parent1, GSGPIndividual parent2, Double crossoverConst, Integer mutationT1, Integer mutationT2, double mutationStep) {
+        if(crossoverConst != null) {  // Crossover offspring
+            this.addCoefficients(parent1.getReprCoef(), crossoverConst);
 
-            GSGPIndividual parent2 = (GSGPIndividual) this.getParent2();
-            this.addCoefficients(parent2.getReprCoef(), (1.0 - this.crossoverConst));
+            this.addCoefficients(parent2.getReprCoef(), (1.0 - crossoverConst));
         }
 
         else {  // Mutation offspring
-            GSGPIndividual parent1 = (GSGPIndividual) this.getParent1();
             this.addCoefficients(parent1.getReprCoef(), 1.0);
 
             Double storedCoef = this.reprCoef.get(mutationT1);
-            this.reprCoef.put(mutationT1, (storedCoef == null) ? this.mutationStep : storedCoef + this.mutationStep);
+            this.reprCoef.put(mutationT1, (storedCoef == null) ? mutationStep : storedCoef + mutationStep);
 
             storedCoef = this.reprCoef.get(mutationT2);
-            this.reprCoef.put(mutationT2, (storedCoef == null) ? (this.mutationStep * -1) : storedCoef + (this.mutationStep * -1));
+            this.reprCoef.put(mutationT2, (storedCoef == null) ? (mutationStep * -1) : storedCoef + (mutationStep * -1));
         }
     }
 

@@ -47,6 +47,7 @@ public class GSXBreeder extends Breeder{
             fitnessFunction.resetFitness(dataType, expData);
             Dataset dataset = expData.getDataset(dataType);
 
+            // Parents semantics
             double[] semInd1;
             double[] semInd2;
 
@@ -82,16 +83,16 @@ public class GSXBreeder extends Breeder{
         while(p1.equals(p2)) p2 = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
 
         // Random constant used in Euclidian Crossover
-        double rt = rndGenerator.nextDouble(true, true);
+        double rc = rndGenerator.nextDouble(true, true);
 
         // Compute the number of nodes in the offspring (4 extra nodes used for operations, 2 for constant and 1 for the number 1)
         BigInteger numNodes = p1.getNumNodes().
                 add(p2.getNumNodes()).
                 add(BigInteger.valueOf(7));
 
-        Fitness fitnessFunction = evaluate(p1, p2, rt, expData);
+        Fitness fitnessFunction = evaluate(p1, p2, rc, expData);
 
-        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p1, p2, rt, null, null, 0.0);
+        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p1, p2, rc, null, null, 0.0);
 
         return offspring;
     }

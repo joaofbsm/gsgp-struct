@@ -27,22 +27,13 @@ public abstract class Individual implements Comparable<Individual>{
     
     protected Fitness fitnessFunction;
 
-    protected ImmutablePair parents;
-
     public Individual(Node tree, Fitness fitnessFunction) {
         this.tree = tree;
         this.fitnessFunction = fitnessFunction;
-        this.parents = ImmutablePair.nullPair();
     }   
     
     public Individual(Node tree, Fitness fitnessFunction, ExperimentalData data) {
         this(tree, fitnessFunction);
-    }
-
-    public Individual(Node tree, Fitness fitnessFunction, GSGPIndividual T1, GSGPIndividual T2) {
-        this.tree = tree;
-        this.fitnessFunction = fitnessFunction;
-        this.parents = ImmutablePair.of(T1, T2);
     }
     
     public double eval(double[] input){
@@ -83,14 +74,6 @@ public abstract class Individual implements Comparable<Individual>{
     
     @Override
     public abstract Individual clone();
-
-    public Individual getParent1() {
-        return (Individual) this.parents.getLeft();
-    }
-
-    public Individual getParent2() {
-        return (Individual) this.parents.getRight();
-    }
 
 
     public abstract double getFitness();

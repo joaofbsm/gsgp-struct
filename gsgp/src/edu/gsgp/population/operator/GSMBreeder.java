@@ -45,6 +45,7 @@ public class GSMBreeder extends Breeder{
             fitnessFunction.resetFitness(dataType, expData);
             Dataset dataset = expData.getDataset(dataType);
 
+            // Parent semantics
             double[] semInd;
 
             if(dataType == DatasetType.TRAINING)
