@@ -6,9 +6,7 @@
 
 package edu.gsgp;
 
-import edu.gsgp.data.Dataset;
 import edu.gsgp.data.ExperimentalData;
-import edu.gsgp.data.Instance;
 import edu.gsgp.nodes.Node;
 import edu.gsgp.nodes.functions.*;
 import edu.gsgp.nodes.terminals.ERC;
@@ -104,7 +102,7 @@ public class GSGP {
 
         // Print equivalent trees' size for comparison
         System.out.println("Best Individual Size: " + ((GSGPIndividual) population.getBestIndividual()).getNumNodes());
-        System.out.println("Reconstruction Size: " + reconstructedInd.getTree().getTreeSize() + "\n");;
+        System.out.println("Reconstruction Size: " + reconstructedInd.getTree().getNumNodes() + "\n");;
 
         /******* EXTRA DATA *******
 
@@ -138,6 +136,47 @@ public class GSGP {
      */
     public Statistics getStatistics() {
         return statistics;
+    }
+
+
+    /**
+     * Reconstruct an equivalent tree based in the individual's coefficient representation.
+     *
+     * @param individual
+     * @param initialPop
+     * @param mutationMasks
+     * @return
+     */
+    public Node reconstructIndividual(Individual individual, Map initialPop, Map mutationMasks) {
+        HashMap<Integer, Double> reprCoef = (HashMap<Integer, Double>) ((GSGPIndividual) individual).getReprCoef();
+
+        Add root = new Add();
+
+        Function current = root;
+
+        for(Map.Entry<Integer, Double> entry : reprCoef.entrySet()) {
+            Mul applyCoef = new Mul();
+            current.addNode(applyCoef, 0);
+
+            applyCoef.addNode(new ERC(entry.getValue()), 0);
+
+            Individual subInd = (Individual) initialPop.get(entry.getKey());
+            if(subInd == null) {
+                applyCoef.addNode((Node) mutationMasks.get(entry.getKey()), 1);
+            }
+            else {
+                applyCoef.addNode(subInd.getTree(), 1);
+            }
+
+            Add nextTerm = new Add();
+            current.addNode(nextTerm, 1);
+            current = nextTerm;
+        }
+
+        current.addNode(new ERC(0), 0);
+        current.addNode(new ERC(0), 1);
+
+        return root;
     }
 
 
@@ -366,46 +405,5 @@ public class GSGP {
 
         System.out.println(sortedRmse);
 
-    }
-
-
-    /**
-     * Reconstruct an equivalent tree based in the individual's coefficient representation.
-     *
-     * @param individual
-     * @param initialPop
-     * @param mutationMasks
-     * @return
-     */
-    public Node reconstructIndividual(Individual individual, Map initialPop, Map mutationMasks) {
-        HashMap<Integer, Double> reprCoef = (HashMap<Integer, Double>) ((GSGPIndividual) individual).getReprCoef();
-
-        Add root = new Add();
-
-        Function current = root;
-
-        for(Map.Entry<Integer, Double> entry : reprCoef.entrySet()) {
-            Mul applyCoef = new Mul();
-            current.addNode(applyCoef, 0);
-
-            applyCoef.addNode(new ERC(entry.getValue()), 0);
-
-            Individual subInd = (Individual) initialPop.get(entry.getKey());
-            if(subInd == null) {
-                applyCoef.addNode((Node) mutationMasks.get(entry.getKey()), 1);
-            }
-            else {
-                applyCoef.addNode(subInd.getTree(), 1);
-            }
-
-            Add nextTerm = new Add();
-            current.addNode(nextTerm, 1);
-            current = nextTerm;
-        }
-
-        current.addNode(new ERC(0), 0);
-        current.addNode(new ERC(0), 1);
-
-        return root;
     }
 }

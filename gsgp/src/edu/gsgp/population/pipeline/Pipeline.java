@@ -34,8 +34,6 @@ public abstract class Pipeline {
         this.rndGenerator = rndGenerator;
         breederArray = properties.getBreederList();
     }
-    
-    public abstract Population evolvePopulation(Population originalPop, ExperimentalData expData, int size);
 
     public abstract Population evolvePopulation(Population originalPop, ExperimentalData expData, int size, Map mutationMasks);
 

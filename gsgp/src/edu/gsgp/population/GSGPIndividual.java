@@ -6,16 +6,13 @@
 
 package edu.gsgp.population;
 
-import edu.gsgp.GSGP;
 import edu.gsgp.Utils;
 import java.math.BigInteger;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import edu.gsgp.nodes.Node;
 import edu.gsgp.population.fitness.Fitness;
-import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /**
  * @author Luiz Otavio Vilas Boas Oliveira
@@ -26,8 +23,8 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 public class GSGPIndividual extends Individual{
 
     private Double crossoverConst;
-    private Node mutationT1;
-    private Node mutationT2;
+    private Integer mutationT1;
+    private Integer mutationT2;
     private double mutationStep;
     private Map<Integer, Double> reprCoef;
 
@@ -59,7 +56,7 @@ public class GSGPIndividual extends Individual{
         this(null, numNodes, fitnessFunction);
     }
 
-    public GSGPIndividual(BigInteger numNodes,  Fitness fitnessFunction, GSGPIndividual T1, GSGPIndividual T2, Double crossoverConst, Node mutationT1, Node mutationT2, double mutationStep) {
+    public GSGPIndividual(BigInteger numNodes,  Fitness fitnessFunction, GSGPIndividual T1, GSGPIndividual T2, Double crossoverConst, Integer mutationT1, Integer mutationT2, double mutationStep) {
         super(null, fitnessFunction, T1, T2);
 
         fitnessFunction.setNumNodes(numNodes);
@@ -164,14 +161,11 @@ public class GSGPIndividual extends Individual{
             GSGPIndividual parent1 = (GSGPIndividual) this.getParent1();
             this.addCoefficients(parent1.getReprCoef(), 1.0);
 
-            Integer t1Hash = this.mutationT1.toString().hashCode();
-            Integer t2Hash = this.mutationT2.toString().hashCode();
+            Double storedCoef = this.reprCoef.get(mutationT1);
+            this.reprCoef.put(mutationT1, (storedCoef == null) ? this.mutationStep : storedCoef + this.mutationStep);
 
-            Double storedCoef = this.reprCoef.get(t1Hash);
-            this.reprCoef.put(t1Hash, (storedCoef == null) ? this.mutationStep : storedCoef + this.mutationStep);
-
-            storedCoef = this.reprCoef.get(t2Hash);
-            this.reprCoef.put(t2Hash, (storedCoef == null) ? (this.mutationStep * -1) : storedCoef + (this.mutationStep * -1));
+            storedCoef = this.reprCoef.get(mutationT2);
+            this.reprCoef.put(mutationT2, (storedCoef == null) ? (this.mutationStep * -1) : storedCoef + (this.mutationStep * -1));
         }
     }
 

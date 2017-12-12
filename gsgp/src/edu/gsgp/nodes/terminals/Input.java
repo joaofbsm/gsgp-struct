@@ -81,10 +81,4 @@ public class Input implements Terminal{
     public Terminal softClone(MersenneTwister rnd) {
         return new Input(index);
     }
-
-
-    @Override
-    public int getTreeSize() {
-        return 1;
-    }
 }

@@ -32,61 +32,74 @@ public class GSMBreeder extends Breeder{
         super(properties, probability);
     }
 
+
     private Fitness evaluate(GSGPIndividual ind,
                              Node randomTree1,
                              Node randomTree2,
                              ExperimentalData expData){
+
         Fitness fitnessFunction = ind.getFitnessFunction().softClone();
+
         for(DatasetType dataType : DatasetType.values()){
             // Compute the (training/test) semantics of generated random tree
             fitnessFunction.resetFitness(dataType, expData);
             Dataset dataset = expData.getDataset(dataType);
+
             double[] semInd;
+
             if(dataType == DatasetType.TRAINING)
                 semInd = ind.getTrainingSemantics();
             else
                 semInd =  ind.getTestSemantics();
+
             int instanceIndex = 0;
             for (Instance instance : dataset) {
+
                 //double rtValue = Utils.sigmoid(randomTree1.eval(instance.input));
-                double rtValue = randomTree1.eval(instance.input);
                 //rtValue -= Utils.sigmoid(randomTree2.eval(instance.input));
+
+                double rtValue = randomTree1.eval(instance.input);
                 rtValue -= randomTree2.eval(instance.input);
+
                 double estimated = semInd[instanceIndex] + properties.getMutationStep() * rtValue;
+
                 fitnessFunction.setSemanticsAtIndex(estimated, instance.output, instanceIndex++, dataType);
             }
             fitnessFunction.computeFitness(dataType);
         }
+
         return fitnessFunction;
     }
 
+
     @Override
-    public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData) {
-        GSGPIndividual p = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
-        Node rt1 = properties.getRandomTree(rndGenerator);
-        Node rt2 = properties.getRandomTree(rndGenerator);
-        BigInteger numNodes = p.getNumNodes().add(new BigInteger(rt1.getNumNodes()+"")).
-                add(new BigInteger(rt2.getNumNodes()+"")).
-                add(BigInteger.ONE);
-        Fitness fitnessFunction = evaluate(p, rt1, rt2, expData);
-        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p, null, null, rt1, rt2, properties.getMutationStep());
-        return offspring;
-    }
-
-
     public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData, Map mutationMasks) {
+        // Mutation parent
         GSGPIndividual p = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
+
+        // Generate random mask trees
         Node rt1 = properties.getRandomTree(rndGenerator);
         Node rt2 = properties.getRandomTree(rndGenerator);
-        BigInteger numNodes = p.getNumNodes().add(new BigInteger(rt1.getNumNodes()+"")).
-                add(new BigInteger(rt2.getNumNodes()+"")).
-                add(BigInteger.ONE);
+
+        // Compute the number of nodes in the offspring (3 extra nodes used for operations and 1 for mutation step)
+        BigInteger numNodes = p.getNumNodes().
+                add(BigInteger.valueOf(rt1.getNumNodes())).
+                add(BigInteger.valueOf(rt2.getNumNodes())).
+                add(BigInteger.valueOf(4));
+
         Fitness fitnessFunction = evaluate(p, rt1, rt2, expData);
-        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p, null, null, rt1, rt2, properties.getMutationStep());
-        mutationMasks.put(rt1.toString().hashCode(), rt1);
-        mutationMasks.put(rt2.toString().hashCode(), rt2);
+
+        Integer rt1Hash = rt1.toString().hashCode();
+        Integer rt2Hash = rt2.toString().hashCode();
+
+        mutationMasks.put(rt1Hash, rt1);
+        mutationMasks.put(rt2Hash, rt2);
+
+        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p, null, null, rt1Hash, rt2Hash, properties.getMutationStep());
+
         return offspring;
     }
+
 
     @Override
     public Breeder softClone(PropertiesManager properties) {

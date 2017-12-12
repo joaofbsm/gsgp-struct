@@ -31,11 +31,6 @@ public class ReproductionBreeder extends Breeder {
     }
 
     @Override
-    public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData) {
-        return properties.selectIndividual(originalPopulation, rndGenerator).clone();
-    }
-
-    @Override
     public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData, Map mutationMasks) {
         return properties.selectIndividual(originalPopulation, rndGenerator).clone();
     }

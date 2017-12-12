@@ -37,8 +37,6 @@ public abstract class Breeder{
     }
     
     public abstract Breeder softClone(PropertiesManager properties);
-    
-    public abstract Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData);
 
     public abstract Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData, Map mutationMasks);
     

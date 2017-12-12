@@ -99,11 +99,6 @@ public class ERC implements Terminal{
         newNode.parentArgPosition = parentArgPosition;
         return newNode;
     }
-
-    @Override
-    public int getTreeSize() {
-        return 1;
-    }
 }
 
 

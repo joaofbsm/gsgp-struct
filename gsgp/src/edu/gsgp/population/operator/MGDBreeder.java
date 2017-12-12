@@ -117,17 +117,11 @@ public class MGDBreeder extends Breeder{
         GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction);
         return offspring;
     }
-    
-    
-    @Override
-    public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData) {
-        GSGPIndividual p = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
-        return generateIndividual(rndGenerator, expData, p);
-    }
 
     @Override
     public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData, Map mutationMasks) {
-        return properties.selectIndividual(originalPopulation, rndGenerator).clone();
+        GSGPIndividual p = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
+        return generateIndividual(rndGenerator, expData, p);
     }
     
     private Fitness evaluate(GSGPIndividual ind, double alpha, ExperimentalData expData){

@@ -36,11 +36,9 @@ public interface Node {
     
     public int getParentArgPosition();
 
-    public int getTreeSize();
-
     /**
      * Default method to evaluate the fitness of a tree beginning at this node.
-     * 
+     *
      * @param expData
      * @param properties
      * @return
