@@ -43,6 +43,8 @@ public interface Node {
      * @param properties
      * @return
      */
+
+    /*
     default public Fitness evaluateFitness(ExperimentalData expData, PropertiesManager properties){
         Fitness fitnessFunction = properties.getFitnessFunction();
 
@@ -61,4 +63,5 @@ public interface Node {
         }
         return fitnessFunction;
     }
+    */
 }

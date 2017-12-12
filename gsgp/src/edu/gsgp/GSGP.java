@@ -6,7 +6,9 @@
 
 package edu.gsgp;
 
+import edu.gsgp.data.Dataset;
 import edu.gsgp.data.ExperimentalData;
+import edu.gsgp.data.Instance;
 import edu.gsgp.nodes.Node;
 import edu.gsgp.nodes.functions.*;
 import edu.gsgp.nodes.terminals.ERC;
@@ -27,7 +29,6 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author Luiz Otavio Vilas Boas Oliveira
@@ -99,19 +100,14 @@ public class GSGP {
         // Save best individual's statistics to file
         statistics.finishEvolution(population.getBestIndividual());
 
-        /*
         // Reconstruct best individual
         Node reconstructedTree = reconstructIndividual(population.get(0), initialInds, mutationMasks);
-        Fitness fitnessFunction = reconstructedTree.evaluateFitness(expData, properties);
+        Fitness fitnessFunction = evaluateFitness(reconstructedTree, expData, properties);
         GSGPIndividual reconstructedInd = new GSGPIndividual(reconstructedTree, fitnessFunction);
 
         // Print equivalent trees' size for comparison
         System.out.println("Best Individual Size: " + ((GSGPIndividual) population.getBestIndividual()).getNumNodes());
         System.out.println("Reconstruction Size: " + reconstructedInd.getTree().getNumNodes() + "\n");;
-        System.out.println("Best Individual TR Fitness: " + population.getBestIndividual().getTrainingFitnessAsString());
-        System.out.println("Best Individual TS Fitness: " + population.getBestIndividual().getTestFitnessAsString());
-        System.out.println("Reconstruction TR Fitness: " + reconstructedInd.getTrainingFitnessAsString());
-        System.out.println("Reconstruction TS Fitness: " + reconstructedInd.getTestFitnessAsString() + "\n");
 
         /******* EXTRA DATA *******
 
@@ -194,5 +190,32 @@ public class GSGP {
         current.addNode(new ERC(0), 1);
 
         return root;
+    }
+
+
+    /**
+     * Default method to evaluate the fitness of a tree beginning at this node.
+     *
+     * @param expData
+     * @param properties
+     * @return
+     */
+    public Fitness evaluateFitness(Node tree, ExperimentalData expData, PropertiesManager properties){
+        Fitness fitnessFunction = properties.getFitnessFunction();
+
+        // Compute the (training/test) semantics of generated random tree
+        for(Utils.DatasetType dataType : Utils.DatasetType.values()){
+            fitnessFunction.resetFitness(dataType, expData);
+            Dataset dataset = expData.getDataset(dataType);
+
+            int instanceIndex = 0;
+            for (Instance instance : dataset) {
+                double estimated = tree.eval(instance.input);
+                fitnessFunction.setSemanticsAtIndex(estimated, instance.output, instanceIndex++, dataType);
+            }
+
+            fitnessFunction.computeFitness(dataType);
+        }
+        return fitnessFunction;
     }
 }
