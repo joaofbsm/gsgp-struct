@@ -18,13 +18,14 @@ import edu.gsgp.population.GSGPIndividual;
 import edu.gsgp.population.Individual;
 import edu.gsgp.population.fitness.Fitness;
 import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author Luiz Otavio Vilas Boas Oliveira
  * http://homepages.dcc.ufmg.br/~luizvbo/ 
  * luiz.vbo@gmail.com
- * Copyright (C) 2014, Federal University of Minas Gerais, Belo Horizonte, Brazil
+ * Copyright (C) 20014, Federal University of Minas Gerais, Belo Horizonte, Brazil
  */
 public class GSMBreeder extends Breeder{
 
@@ -58,7 +59,7 @@ public class GSMBreeder extends Breeder{
 
 //                double rtValue = Utils.sigmoid(randomTree1.eval(instance.input));
 //                rtValue -= Utils.sigmoid(randomTree2.eval(instance.input));
-
+//
                 double rtValue = randomTree1.eval(instance.input);
                 rtValue -= randomTree2.eval(instance.input);
 
@@ -74,7 +75,7 @@ public class GSMBreeder extends Breeder{
 
 
     @Override
-    public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData, Map mutationMasks) {
+    public Individual generateIndividual(MersenneTwister rndGenerator, ExperimentalData expData) {
         // Mutation parent
         GSGPIndividual p = (GSGPIndividual)properties.selectIndividual(originalPopulation, rndGenerator);
 
@@ -90,13 +91,7 @@ public class GSMBreeder extends Breeder{
 
         Fitness fitnessFunction = evaluate(p, rt1, rt2, expData);
 
-        Integer rt1Hash = rt1.toString().hashCode();
-        Integer rt2Hash = rt2.toString().hashCode();
-
-        mutationMasks.put(rt1Hash, rt1);
-        mutationMasks.put(rt2Hash, rt2);
-
-        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction, p, null, null, rt1Hash, rt2Hash, properties.getMutationStep());
+        GSGPIndividual offspring = new GSGPIndividual(numNodes, fitnessFunction);
 
         return offspring;
     }

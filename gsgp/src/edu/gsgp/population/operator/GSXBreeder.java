@@ -62,7 +62,7 @@ public class GSXBreeder extends Breeder{
 
             int instanceIndex = 0;
             for (Instance instance : dataset) {
-                double estimated = rtValue*semInd1[instanceIndex] + (1-rtValue)*semInd2[instanceIndex];
+                double estimated = rtValue * semInd1[instanceIndex] + (1 - rtValue) * semInd2[instanceIndex];
 
                 fitnessFunction.setSemanticsAtIndex(estimated, instance.output, instanceIndex++, dataType);
             }

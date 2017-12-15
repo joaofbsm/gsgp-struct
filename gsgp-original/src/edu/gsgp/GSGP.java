@@ -7,11 +7,15 @@
 package edu.gsgp;
 
 import edu.gsgp.data.ExperimentalData;
+import edu.gsgp.nodes.Node;
 import edu.gsgp.population.Population;
 import edu.gsgp.population.Individual;
 import edu.gsgp.data.PropertiesManager;
 import edu.gsgp.population.populator.Populator;
 import edu.gsgp.population.pipeline.Pipeline;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Luiz Otavio Vilas Boas Oliveira
@@ -31,36 +35,51 @@ public class GSGP {
         statistics = new Statistics(properties.getNumGenerations(), expData);
         rndGenerator = properties.getRandomGenerator();
     }
-    
+
     public void evolve() throws Exception{
-        boolean canStop = false;     
-        
+        statistics.startClock();
+
+        // Early stopping flag
+        boolean canStop = false;
+
+        // Initialize auxiliary structures
         Populator populator = properties.getPopulationInitializer();
         Pipeline pipe = properties.getPipeline();
-        
-        statistics.startClock();
-        
-        Population population = populator.populate(rndGenerator, expData, properties.getPopulationSize());
         pipe.setup(properties, statistics, expData, rndGenerator);
-        
+
+        // Generate initial population
+        Population population = populator.populate(rndGenerator, expData, properties.getPopulationSize());
+
         statistics.addGenerationStatistic(population);
-        
+
         for(int i = 0; i < properties.getNumGenerations() && !canStop; i++){
-            //System.out.println("Generation " + (i+1) + ":");
-                        
             // Evolve a new Population
             Population newPopulation = pipe.evolvePopulation(population, expData, properties.getPopulationSize()-1);
+
             // The first position is reserved for the best of the generation (elitism)
             newPopulation.add(population.getBestIndividual());
+
+            // Check stopping criterion
             Individual bestIndividual = newPopulation.getBestIndividual();
             if(bestIndividual.isBestSolution(properties.getMinError())) canStop = true;
+
+            // Update the population
             population = newPopulation;
-            
+
+            // Save statistics to file
             statistics.addGenerationStatistic(population);
         }
+
+        // Save best individual's statistics to file
         statistics.finishEvolution(population.getBestIndividual());
     }
 
+
+    /**
+     * Get statistics for current GSGP instance.
+     *
+     * @return
+     */
     public Statistics getStatistics() {
         return statistics;
     }

@@ -96,7 +96,6 @@ public class GSGP {
             statistics.addGenerationStatistic(population);
         }
 
-
         // Save best individual's statistics to file
         statistics.finishEvolution(population.getBestIndividual());
 
@@ -194,7 +193,7 @@ public class GSGP {
 
 
     /**
-     * Default method to evaluate the fitness of a tree beginning at this node.
+     * Method to evaluate the fitness of a tree beginning at this node.
      *
      * @param expData
      * @param properties

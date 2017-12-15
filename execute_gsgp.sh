@@ -7,8 +7,8 @@
 #bash_version   :GNU bash, version 4.4.0(1)-release
 #==============================================================================
 
-datasets=("airfoil" "ccn" "ccun" "concrete" "energyCooling" "energyHeating" "parkinsons" "ppb-wth0s" "towerData" "wineRed" "wineWhite" "yacht")
-#datasets=("yacht")
+#datasets=("airfoil" "ccn" "ccun" "concrete" "energyCooling" "energyHeating" "parkinsons" "ppb-wth0s" "towerData" "wineRed" "wineWhite" "yacht")
+datasets=("towerData")
 gsgp_path=$(pwd)"/gsgp/out/artifacts/gsgp_jar"
 experiments_path=$(pwd)"/experiments/gsgp"
 results_path=$(pwd)"/results/gsgp"
@@ -24,4 +24,4 @@ do
     #python3 "$scripts_path"/plot_ind.py -d "$dataset"
 done
 
-tail -n 9 "$results_path"/*.txt > "$results_path"/results.txt
+#tail -n 9 "$results_path"/*.txt > "$results_path"/results.txt

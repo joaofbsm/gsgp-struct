@@ -8,7 +8,7 @@
 #==============================================================================
 
 #datasets=("airfoil" "ccn" "ccun" "concrete" "energyCooling" "energyHeating" "parkinsons" "ppb-wth0s" "towerData" "wineRed" "wineWhite" "yacht")
-datasets=("airfoil")
+datasets=("towerData")
 gsgp_path=$(pwd)"/gsgp-canonical/out/artifacts/gsgp_jar"
 experiments_path=$(pwd)"/experiments/gsgp-canonical"
 results_path=$(pwd)"/results/gsgp-canonical"
