@@ -32,3 +32,6 @@ out.stat
 
 # Datasets
 datasets/
+
+# Test implementation
+gsgp-cpobj/
