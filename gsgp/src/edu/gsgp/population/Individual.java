@@ -6,13 +6,9 @@
 
 package edu.gsgp.population;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
 import edu.gsgp.data.ExperimentalData;
 import edu.gsgp.nodes.Node;
 import edu.gsgp.population.fitness.Fitness;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import javax.naming.InitialContext;
 
