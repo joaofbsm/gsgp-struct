@@ -1,0 +1,4 @@
+parent = /Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/experiments/gsg2p-single/master.txt
+experiment.data = /Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/datasets/energyCooling-train-#.csv
+experiment.data.test = /Users/joaofbsm/Documents/UFMG/2017-2/POC1/implementation/datasets/energyCooling-test-#.csv
+experiment.file.prefix = output-energyCooling

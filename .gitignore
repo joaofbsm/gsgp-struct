@@ -22,9 +22,6 @@ hs_err_pid*
 
 # Execution outputs
 results/
-results-gsgp/
-results-canonical/
-results-gp/
 
 # Output from GP
 out.stat

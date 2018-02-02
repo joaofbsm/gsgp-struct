@@ -1,5 +1,0 @@
-parent = ~/research/isr/experiments/6-gsgp-wf-03.07.2017/47-08.08.2017-imap-rem_xy-L0.5/master.txt
-experiment.data = ~/research/isr/datasets/normalized/ccun-train-#.csv
-experiment.data.test = ~/research/isr/datasets/normalized/ccun-test-#.csv
-experiment.weight.file = ~/research/isr/datasets/2-08.06.2017/isomap/weights/remoteness-xy-k5-L0.5-ccun-train-#.csv
-experiment.file.prefix = out_files/output-ccun

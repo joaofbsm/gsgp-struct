@@ -7,10 +7,10 @@
 #bash_version   :GNU bash, version 4.4.0(1)-release
 #==============================================================================
 
-datasets=("airfoil" "ccn" "ccun" "concrete" "energyCooling" "energyHeating" "parkinsons" "ppb-wth0s" "towerData" "wineRed" "wineWhite" "yacht")
+datasets=("airfoil" "ccn" "ccun" "concrete" "energyCooling" "energyHeating" "parkinsons" "ppb" "towerData" "wineRed" "wineWhite" "yacht")
 num_input_attrib=("10" "127" "129" "13" "13" "13" "23" "259" "30" "16" "16" "11")
 gp_path=$(pwd)"/gp"
-datasets_path=$(pwd)"/datasets/original"
+datasets_path=$(pwd)"/datasets"
 results_path=$(pwd)"/results/gp"
 scripts_path=$(pwd)"/scripts"
 
